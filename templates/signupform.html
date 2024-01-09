@@ -1,0 +1,150 @@
+{% extends "base.html" %} {% load static %} {% block body %}
+
+<div class="container p-5 my-3 register">
+  <div class="row">
+    <div class="col-md-3 register-left">
+      <i class="bi bi-rocket display-2"></i>
+      <h3>Welcome</h3>
+      <p>You are 30 seconds away from earning your own money!</p>
+      <a href='{% url "login" %}'>
+        <button class="btn btn-light w-50 rounded-pill fw-bold text-info">
+            <i class="bi bi-person-fill"></i> Login
+          </button>
+    </a>
+    </div>
+    <div class="col-6 register-right p-2">
+      <div class="py-3">
+        <h2 class="text-center">
+          <i class="bi bi-person-bounding-box text-info"></i>
+        </h2>
+        <h3 class="text-center text-info">Sign Up Here...</h3>
+      </div>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <form method="post">
+            {% csrf_token %}
+            <div class="row" style="padding: 2% 10% 5% 10%">
+              <div class="col-12">
+                <div class="d-flex">
+                  <div class="form-group mb-3 col-6 d-flex pe-3">
+                    <i class="bi bi-person pt-1 pe-2 h4"></i>
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      placeholder="First Name *"
+                      name="first_name"
+                    />
+                  </div>
+                  <div class="form-group mb-3 col-6 d-flex ms-auto ps-3">
+                    <i class="bi bi-person pt-1 pe-2 h4"></i>
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      placeholder="Last Name *"
+                      name="last_name"
+                    />
+                  </div>
+                </div>
+                <div class="form-group mb-3 d-flex">
+                  <i class="bi bi-envelope-at pt-1 pe-2 h4"></i>
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Email ID *"
+                    required
+                    name="email"
+                  />
+                </div>
+                <div class="form-group mb-3 d-flex">
+                  <i class="bi bi-telephone-plus pt-1 pe-2 h4"></i>
+                  <input
+                    type="number"
+                    class="form-control"
+                    required
+                    placeholder="Phone No. *"
+                    name="phone"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <div class="maxl">
+                    <span class="fw-normal me-5">
+                      <i class="bi bi-person-plus pt-1 pe-2 h4"></i> Gender * :
+                    </span>
+                    <label class="radio inline pe-3">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="male"
+                        id="male"
+                        required
+                      />
+                      <label for="male">Male</label>
+                    </label>
+                    <label class="radio inline pe-3">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="female"
+                        required
+                        id="female"
+                      />
+                      <label for="female">Female</label>
+                    </label>
+                    <label class="radio inline">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="Other"
+                        required
+                        id="other"
+                      />
+                      <label for="other">Other</label>
+                    </label>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="form-group mb-3 col-6 pe-3 d-flex">
+                    <i class="bi bi-shield-lock pt-1 pe-2 h4"></i>
+                    <input
+                      type="password"
+                      class="form-control"
+                      required
+                      placeholder="Password *"
+                      name="password"
+                    />
+                  </div>
+                  <div class="form-group mb-3 col-6 ps-3 d-flex ms-auto">
+                    <i class="bi bi-shield-lock pt-1 pe-2 h4"></i>
+                    <input
+                      type="password"
+                      class="form-control"
+                      required
+                      placeholder="Conform Password *"
+                      name="conform_password"
+                    />
+                  </div>
+                </div>
+                <div class="text-center mt-2">
+                  <button
+                    class="btnRegister mt-0 text-center m-auto"
+                    type="submit"
+                  >
+                    Register <i class="bi bi-arrow-right ps-2 h6"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

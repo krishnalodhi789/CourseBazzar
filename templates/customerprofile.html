@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 bg-dark">
+            {% include 'customerdeshboard_sidebar.html' with profile='bg-light text-dark' %}
+        </div>
+        <div class="col-10">
+            
+<div class="container shadow-lg m-4 p-5">
+    <div class="row py-4">
+      <div class="col-12 text-center">
+        {% if customer.image.url %}
+        <img
+          src="{{customer.image.url}}"
+          style="height: 200px; width: 250px"
+          class="m-auto rounded-circle"
+        />
+        {% else %}
+        <img
+          src="{% static 'images/pic.png' %}"
+          style="height: 200px; width: 250px"
+          class="m-auto rounded-circle"
+        />
+        {% endif %}
+      </div>
+      <div class="col-5 m-auto my-4">
+        <div class="row">
+          <div class="col ps-5">
+            <p class="fw-semibold">
+              <i class="bi bi-person pt-1 pe-2 fw-semibold"></i>Full Name
+            </p>
+          </div>
+          <div class="col ps-5">
+            <h5>: {{customer.user.first_name}} {{customer.user.last_name}}</h5>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col ps-5">
+            <p class="fw-semibold">
+              <i class="bi bi-envelope-at pt-1 pe-2 fw-semibold"></i>Email ID
+            </p>
+          </div>
+          <div class="col ps-5">
+            <h5>: {{customer.user.email}}</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col ps-5">
+            <p class="fw-semibold">
+              <i class="bi bi-telephone-plus pt-1 pe-2 fw-semibold"></i>Phone No
+            </p>
+          </div>
+          <div class="col ps-5">
+            <h5>: {{customer.phone}}</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col ps-5">
+            <p class="fw-semibold">
+              <i class="bi bi-person pt-1 pe-2 fw-semibold"></i>Gender
+            </p>
+          </div>
+          <div class="col ps-5">
+            <h5 class="text-capitalize">: {{customer.gender}}</h5>
+          </div>
+        </div>
+  
+        <div class="row my-3">
+          <button class="btn btn-secondary px-5 fw-semibold w-auto mx-auto"> Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+        </div>
+    </div>
+</div>
+{% endblock body %}
