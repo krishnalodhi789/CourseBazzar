@@ -1,0 +1,127 @@
+{% extends "base.html" %} {% block body %}
+<div class="container-fluid overflow-hidden">
+  <div class="row ps-4 pt-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'buycourse' %}">Buy Course</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'buycourse' %}">{{course.title}}</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">About More</li>
+        </ol>
+      </nav>
+      <hr />
+  </div>
+</div>
+<div class="container my-5">  
+  <div class="row gx-5">
+    <div class="col-7">
+      <div class="card">
+        <div class="card-img-top" style="height: 300px">
+          <img
+            src="{{course.image.url}}"
+            class="img-fluid w-100 h-100"
+            alt="image"
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{course.title}}</h5>
+          <p class="card-text fst-italic">{{course.description}}</p>
+        </div>
+        <hr />
+        <div
+          class="card-body d-flex justify-content-between align-items-center"
+        >
+          <div>
+            <h5 class="text-info">
+              <i class="bi bi-currency-dollar"></i>{{course.price}}.00
+            </h5>
+            <p class="fst-italic fw-semibold">
+              <i class="bi bi-cart-fill"></i>
+              {{course.sale_counter}} Sales
+            </p>
+            <p class="text-secondary">
+              <i class="bi bi-calendar-check"></i> Published Date & Time :
+              {{course.approval_datetime}}
+            </p>
+          </div>
+          <div>
+            <button class="btn btn-outline-success fw-semibold px-4">
+              <i class="bi bi-cart-plus"></i> Add To Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-5 my-auto">
+      <div class="p-4 rounded-4 shadow-lg">
+        <h5 class="text-secondary">Publisher Details :</h5>
+        <hr />
+        <div class="py-2 mx-auto" style="height: 150px; width: 160px">
+          <img
+            src="{{course.customer.image.url}}"
+            class="h-100 w-100 rounded-circle"
+            alt="image"
+          />
+        </div>
+        <div class="row mx-auto mt-4">
+          <div class="col ps-5">
+            <p class="fw-semibold">
+              <i class="bi bi-person pt-1 pe-2 fw-semibold"></i>Full Name
+            </p>
+          </div>
+          <div class="col ps-5">
+            <h5>
+              : {{course.customer.user.first_name}}
+              {{course.customer.user.last_name}}
+            </h5>
+          </div>
+        </div>
+
+        <div class="row mx-auto">
+          <div class="col ps-5">
+            <p class="fw-semibold">
+              <i class="bi bi-envelope-at pt-1 pe-2 fw-semibold"></i>Email ID
+            </p>
+          </div>
+          <div class="col ps-5">
+            <h5>: {{course.customer.user.email}}</h5>
+          </div>
+        </div>
+        <div class="row mx-auto">
+          <div class="col ps-5">
+            <p class="fw-semibold">
+              <i class="bi bi-telephone-plus pt-1 pe-2 fw-semibold"></i>Phone No
+            </p>
+          </div>
+          <div class="col ps-5">
+            <h5>: {{course.customer.phone}}</h5>
+          </div>
+        </div>
+        <div class="row mx-auto">
+          <div class="col ps-5">
+            <p class="fw-semibold">
+              <i class="bi bi-person pt-1 pe-2 fw-semibold"></i>Gender
+            </p>
+          </div>
+          <div class="col ps-5">
+            <h5 class="text-capitalize">: {{course.customer.gender}}</h5>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <a href="{% url 'customercourses' id=course.customer.id %}">
+            <button
+            class="btn btn-outline-success text--success-emphasis fw-semibold w-50 mx-auto"
+          >
+            See More Courses {{course_id.id}} <i class="bi bi-box-arrow-up-right ms-1"></i>
+          </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

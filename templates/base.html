@@ -30,16 +30,19 @@
       rel="stylesheet">
   </head>
   <body >
-      <div class="">
+        {% if home %}
+        {% include "header.html" with  home="text-info border-bottom border-info" %}
+        {% elif buycourse %}
+        {% include "header.html" with  buycourse="text-info border-bottom border-info" %}
+        {% else %}
         {% include "header.html" %}
-      </div>
-      <div class="">
+        {% endif %}
+
         {% block body %}
         {% endblock body %}
-      </div>
-      <div class="mt-auto">
+
+        
         {% include "footer.html" %}
-      </div>
 
 
     {% block customJS %}{% endblock customJS %}

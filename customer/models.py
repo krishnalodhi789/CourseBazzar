@@ -17,9 +17,16 @@ class Course(models.Model):
     description = models.TextField(max_length=5000)
     price = models.IntegerField()
     sale_counter = models.IntegerField(default=0)
-    published_date = models.DateField(auto_now=True)
+    published_datetime = models.DateTimeField(auto_now=True)
+    approval_datetime = models.DateTimeField(blank=True, null=True)
     approve = models.BooleanField(default = False)
     image = models.ImageField(upload_to="Course Image/")
     course_file = models.FileField( upload_to='Courses/')
     
+    
+class AddToCart(models.Model):
+    customer =  models.ForeignKey(Customer, related_name='customer', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, related_name='courses', on_delete=models.CASCADE)
+    counter = models.IntegerField(default=0)
+
     

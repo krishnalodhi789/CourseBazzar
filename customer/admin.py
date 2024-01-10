@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Course
+from .models import Customer, Course ,AddToCart
 
 
 admin.site.register(Customer)
@@ -8,3 +8,8 @@ admin.site.register(Customer)
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display =['customer','title',"course_file"]
+    
+
+@admin.register(AddToCart)
+class AddToCartAdmin(admin.ModelAdmin):
+    list_display =['customer','course']

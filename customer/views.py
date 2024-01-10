@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import Customer, Course
+from .models import Customer, Course, AddToCart
 
 
 def signupform(request):
@@ -100,3 +100,25 @@ def uploadedcourses(request):
     context = {'courses':courses}
     print(courses)
     return render(request, 'uploadedcourses.html', context)
+
+
+
+@login_required(login_url='login')
+def addtocart(request, id):
+    backurl = request.META.get("HTTP_REFERER")
+    customer = Customer.objects.get(user_id=request.user.id)
+    course = Course.objects.get(id=id)
+    
+    if AddToCart.objects.filter(customer=customer,course=course).exists():
+        print("Con't Add...")
+        return redirect(backurl)
+    addtocart = AddToCart.objects.create(
+        customer = customer,
+        course = course
+    )
+    addtocart.save()
+    print("Successfully Add...")
+    return redirect(backurl)
+    
+    
+    

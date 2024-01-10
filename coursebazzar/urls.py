@@ -22,13 +22,22 @@ from myapp import views as myapp_view
 from customer import views as customer_view
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    # myapp app URLs ---------------------------------------
     path("",myapp_view.home, name='home'),
+    path("buy course/",myapp_view.buycourse, name='buycourse'),
+    path("course/about more/<int:id>/",myapp_view.aboutmorecourse, name='aboutmorecourse'),
+    path("course/about more/customer courses/<int:id>/",myapp_view.customercourses, name='customercourses'),
+    
+    
+    # Customer app URLs -------------------------------------------
     path("signup/", customer_view.signupform, name='signup'),
     path("login/", customer_view.customerlogin, name='login'),
     path("logout/", customer_view.customerlogout, name='customerlogout'),
     path("customer/deshboard/profile/", customer_view.customerprofile, name='customerprofile'),
     path("customer/deshboard/addcourse/", customer_view.addcourse, name='addcourse'),
     path("customer/deshboard/uploadedcourses/", customer_view.uploadedcourses, name='uploadedcourses'),
+    path("customer/add to cart/<int:id>/", customer_view.addtocart, name='addtocart'),
 ]
 
 
