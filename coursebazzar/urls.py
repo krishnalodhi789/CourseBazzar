@@ -38,6 +38,7 @@ urlpatterns = [
     path("customer/deshboard/addcourse/", customer_view.addcourse, name='addcourse'),
     path("customer/deshboard/uploadedcourses/", customer_view.uploadedcourses, name='uploadedcourses'),
     path("customer/add to cart/<int:id>/", customer_view.addtocart, name='addtocart'),
+    path("customer/deshboard/carts/", customer_view.customercart, name='customercart'),
 ]
 
 

@@ -6,7 +6,7 @@
     <img
       src="{{ customer.image.url }}"
       alt
-      style="height: 120px; width: 130px"
+      style="height: 80px; width: 90px"
       class="rounded-circle"
     />
     {% else %}
@@ -52,6 +52,18 @@
       ><li class="align-center p-2 {{uploadedcourses}}">
         <i
           class="bi bi-floppy fw-semibold text-light h5 pe-2 {{uploadedcourses}}"
+        ></i
+        >Uploaded Course
+      </li></a
+    >
+    <hr class="text-light m-0" />
+
+    <a
+      href="{% url 'customercart' %}"
+      class="fw-semibold text-light {{customercart}} w-100"
+      ><li class="align-center p-2 {{customercart}}">
+        <i
+          class="bi bi-floppy fw-semibold text-light h5 pe-2 {{customercart}}"
         ></i
         >Uploaded Course
       </li></a

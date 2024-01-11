@@ -5,7 +5,7 @@
         <h1 class="display-6 fw-semibold">Latest Uploaded Course ..</h1>
         <hr />
     </div>
-    <div class="row pt-5 gx-5">
+    <div class="row pt-5 gy-5 gx-5">
         <!--     
             =======================================================================
             Approved courses here==================================================
@@ -21,7 +21,6 @@
 
                 <div style="width: 40%" class="d-flex">
                 <div class="px-2">
-                    <div class="clas"></div>
                     <img
                     src="{{course.customer.image.url}}"
                     alt=""
@@ -77,28 +76,37 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" click="True">
-    Launch demo modal
-  </button>
-  
+{% for msg in messages %}
+<button type="button"  class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="msgbutton">
+    button
+  </button> 
+  <iframe src="https://www.youtube.com/watch?v=rEAa63Fryhs"onload="message()" class="d-none" frameborder="0"></iframe>
+{% endfor %}
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog border border-danger rounded-3">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Alert : </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          This Course, You have already in your cart.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary w-50 mx-auto" data-bs-dismiss="modal">Ok</button>
         </div>
       </div>
     </div>
   </div>
 
-
   {% endblock body %}
+
+{% block customJS %}
+<script>
+    function message(){
+        var btn = document.getElementById("msgbutton")
+        btn.click()
+    }
+</script>
+{% endblock customJS %}

@@ -1,0 +1,120 @@
+{% extends "base.html" %} {% load static %} {% block body %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2 bg-dark">
+      {% include 'customerdeshboard_sidebar.html' with customercart='bg-light text-dark' %}
+    </div>
+    <div class="col-10">
+      <div class="container shadow-lg m-4 p-5">
+        <div class="row">
+          <h1 class="display-5 text-center h2">Your Uploaded Course ..</h1>
+          <hr />
+        </div>
+        {% if not carts %}
+        <div class="row">
+          <div
+            class="col-6 mx-auto text-center text-danger d-flex flex-column justify-content-center"
+          >
+            <i class="bi bi-folder2-open" style="font-size: 200px"></i>
+            <h1>Empty...</h1>
+            <a href="{% url 'addcourse' %}">
+              <button
+                class="w-auto mt-4 btn btn-outline-success px-5 fw-semibold large"
+              >
+                <i class="bi bi-plus-lg align-middle"></i> Upload Course
+              </button>
+            </a>
+          </div>
+        </div>
+        {% else %}
+        <!--         
+        =======================================================================
+        Approved courses here==================================================
+        ======================================================================= 
+        
+      -->
+        {% for cart in carts %}
+        <div class="row py-4">
+          <div
+            class="col-11 mx-auto shadow-lg d-flex justify-content-center"
+          >
+            <div class="row p-3">
+              <div class="col-3 pe-0">
+                <img
+                  src="{{cart.course.image.url}}"
+                  height="100%"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="col-5 d-flex">
+                <div class="px-2">
+                  <img
+                  src="{{cart.course.customer.image.url}}"
+                  alt=""
+                  style="width: 30px; height: 30px"
+                  class="rounded-circle"
+                  />
+                  {{cart.customer.user.email}}
+                  <h4>{{cart.course.title}}</h4>
+                  <p class="fw-normal mb-0" style="font-size: 13px">
+                    {{cart.course.description|truncatechars:149 }}
+                  </p>
+                  <div class="w-100 text-end">
+                  <button class="btn btn-primary" style="font-size: 12px; font-weight: 600;" data-bs-toggle="collapse" href="#{{cart.course.title}}" role="button" aria-expanded="false" aria-controls="{{cart.course.title}}"> Read More</button>
+                </div>
+                </div>
+                <div class="vr "></div>
+              </div>
+              <div class="col-2">
+                <div class="text-end">
+                  <i class="bi bi-person-lines-fill pe-1"></i>
+                  <div class="vr"></div>
+                  <i class="bi bi-suit-heart pe-1"></i>
+                </div>
+                <h5 class="text-center mt-3">
+                  <i class="bi bi-currency-dollar"></i>{{cart.course.price}}.00
+                </h5>
+                <p class="small fw-semibold mb-1 text-center">
+                  {{cart.course.sale_counter}} Sales
+                </p>
+                <p class="small text-center mb-1">
+                  Uploaded : <br />{{cart.course.approval_datetime}}
+                </p>
+              </div>
+              <div class="col-2"></div>
+            </div>
+
+            <!-- <div style="width: 35%">
+              
+            </div>
+            <div style="width: 40%" class="d-flex">
+              
+            </div>
+            <div
+              class="d-flex flex-column align-items-center  ps-2"
+              style="width: 22%"
+            >
+             
+            </div> -->
+
+          </div>
+        
+        <div class="col-11 shadow-lg mx-auto">
+          <div class="row p-3">
+            <div class="collapse" id="{{cart.course.title}}">
+              <div class="card card-body">
+                <h4>{{cart.course.title}}</h4>
+                <p>{{cart.course.description}}</p>
+                </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

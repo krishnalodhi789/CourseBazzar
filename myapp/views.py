@@ -26,7 +26,6 @@ def customercourses(request, id):
     backurl = request.META.get('HTTP_REFERER')
     backcourse = Course.objects.get(id=id)
     customercourses = Course.objects.filter(customer_id =backcourse.id)
-    print(customercourses)
     context={
         'backurl':backurl,
         'backcourse':backcourse,

@@ -48,7 +48,6 @@ def customerlogin(request):
             messages.error(request, 'Invalid Email and Password !!')
             return redirect('login')
         user = User.objects.get(username = email)
-        # print(user.customer)
         if not Customer.objects.filter(user = user).exists() :
             messages.error(request, 'Invalid Email and Password !!')
             return redirect('login')
@@ -98,7 +97,6 @@ def uploadedcourses(request):
     customer = Customer.objects.get(user_id=request.user.id)
     courses = Course.objects.filter(customer_id=customer.id)
     context = {'courses':courses}
-    print(courses)
     return render(request, 'uploadedcourses.html', context)
 
 
@@ -110,15 +108,19 @@ def addtocart(request, id):
     course = Course.objects.get(id=id)
     
     if AddToCart.objects.filter(customer=customer,course=course).exists():
-        print("Con't Add...")
-        return redirect(backurl)
+        messages.error(request,True)
+        return redirect('buycourse')
     addtocart = AddToCart.objects.create(
         customer = customer,
         course = course
     )
     addtocart.save()
-    print("Successfully Add...")
-    return redirect(backurl)
+    return redirect('buycourse')
     
     
-    
+@login_required(login_url='login')
+def customercart(request):
+    customer = Customer.objects.get(user_id=request.user.id)
+    carts = AddToCart.objects.filter(customer_id=customer.id)
+    context = {'carts':carts}
+    return render(request, 'customercart.html', context)

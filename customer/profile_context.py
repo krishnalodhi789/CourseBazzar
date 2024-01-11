@@ -9,9 +9,6 @@ def profile_detail(request):
     
     if user.is_authenticated :
         customer = Customer.objects.get(user_id = user.id)
-        print(customer.id)
-        print(customer.user_id)
-        print(user.id)
         cartcounter =  AddToCart.objects.filter(customer_id = customer.id).count()
         context={
             'customer':customer,
