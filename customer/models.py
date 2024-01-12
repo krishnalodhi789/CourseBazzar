@@ -29,4 +29,14 @@ class AddToCart(models.Model):
     course = models.ForeignKey(Course, related_name='courses', on_delete=models.CASCADE)
     counter = models.IntegerField(default=0)
 
+class Wallet(models.Model):
+    user=models.OneToOneField(User, on_delete=models.CASCADE,related_name='wallet')
+    balance = models.FloatField(default=0)
+    
+class AmountTransitionHistory(models.Model):
+    user = models.ForeignKey(User, related_name='amounttransitionhistory', on_delete=models.CASCADE)
+    status =  models.CharField(max_length=50)
+    amount = models.FloatField(default=0)
+    datetime = models.DateTimeField(auto_now=True)
+    
     

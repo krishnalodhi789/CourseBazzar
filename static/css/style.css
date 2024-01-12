@@ -348,3 +348,36 @@ Sign up Form =============================================
   margin-bottom: -15%;
   color: #495057;
 }
+
+
+
+/* 
+===========================================================
+Add to Cart =============================================
+========================================================== */
+.deletebtn i{
+  background-color: #fff;
+  transition: all .2s;
+  font-size: 2rem;
+}
+
+.deletebtn i:hover{
+  background-color: rgba(152, 108, 108, 0.22) !important;
+}
+
+
+.deletebtn i:active{
+  font-size: 28px !important;
+}
+
+/* 
+===========================================================
+Wallet  =============================================
+========================================================== */
+
+.addbalancefield{
+  border: none;
+}
+.addbalancefield:focus{
+  outline: none;
+}

@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import Customer, Course, AddToCart
+from .models import Customer, Course, AddToCart, AmountTransitionHistory
 
 
 def signupform(request):
@@ -108,14 +108,15 @@ def addtocart(request, id):
     course = Course.objects.get(id=id)
     
     if AddToCart.objects.filter(customer=customer,course=course).exists():
-        messages.error(request,True)
-        return redirect('buycourse')
+        messages.error(request,"True")
+        print("already Added...")
+        return redirect(backurl)
     addtocart = AddToCart.objects.create(
         customer = customer,
         course = course
     )
     addtocart.save()
-    return redirect('buycourse')
+    return redirect(backurl)
     
     
 @login_required(login_url='login')
@@ -124,3 +125,36 @@ def customercart(request):
     carts = AddToCart.objects.filter(customer_id=customer.id)
     context = {'carts':carts}
     return render(request, 'customercart.html', context)
+
+@login_required(login_url='login')
+def deletecart(request, id):
+    course = AddToCart.objects.get(id=id)
+    course.delete()
+    return redirect("customercart")
+
+
+@login_required(login_url='login')
+def wallet(request):
+    if request.method == "POST":
+        amount = request.POST.get('amount')
+        old_balance = request.user.wallet.balance
+        total_balance = old_balance+float(amount)
+        new_balance = request.user.wallet
+        new_balance.balance = total_balance
+        new_balance.save()
+        
+        transition = AmountTransitionHistory.objects.create(
+            user= request.user,
+            status = 'credit',
+            amount = amount            
+        )
+        transition.save()
+        return redirect("wallet")
+    transitions=request.user.amounttransitionhistory.all()
+    print(transitions)
+    context={
+        'transitions':transitions
+    }
+    return render(request, 'wallet.html', context)
+
+# @login_required(login_url='login')

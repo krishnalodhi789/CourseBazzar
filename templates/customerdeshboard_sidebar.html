@@ -63,12 +63,24 @@
       class="fw-semibold text-light {{customercart}} w-100"
       ><li class="align-center p-2 {{customercart}}">
         <i
-          class="bi bi-floppy fw-semibold text-light h5 pe-2 {{customercart}}"
+          class="bi bi-cart4 fw-semibold text-light h5 pe-2 {{customercart}}"
         ></i
-        >Uploaded Course
+        >Your Carts
       </li></a
     >
     <hr class="text-light m-0" />
+
+    <a
+    href="{% url 'wallet' %}"
+    class="fw-semibold text-light {{wallet}} w-100"
+    ><li class="align-center p-2 {{wallet}}">
+      <i
+        class="bi bi-wallet2 fw-semibold text-light h5 pe-2 {{wallet}}"
+      ></i
+      >Your wallet 
+    </li></a
+  >
+  <hr class="text-light m-0" />
     </ul>
   </div>
 

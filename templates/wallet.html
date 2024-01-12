@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 bg-dark">
+            {% include 'customerdeshboard_sidebar.html' with wallet='bg-light text-dark' %}
+        </div>
+        <div class="col-10">
+            
+<div class="container shadow-lg m-4 px-5 pb-5">
+    <div class="row py-4">
+     <h1 class="display-5 text-center fw-semibold"><i class="bi bi-wallet-fill"></i> </h1>
+     <h1 class="display-5 text-center fw-semibold">Your wallet </h1>
+     <hr>
+    </div>
+    <div class="row">
+        <div class="col-4 p-3 border mx-auto shadow">
+            <form action="" method="POST">
+                {% csrf_token %}
+           <div class="text-center">
+            <span class="fw-semibold me-5">Your balance :</span>
+            <span class="fw-semibold ms-auto"><i class="bi bi-currency-dollar"></i> {{user.wallet.balance}}</span>
+           </div>
+            <div class="text-center mt-4 border p-2 w-75 mx-auto rounded-5">
+                <i class="bi bi-currency-dollar"></i>
+               <input type="number" name="amount" class="w-75 addbalancefield" placeholder="Enter amount" >
+           </div>
+           <div class="text-center mt-4">
+               <button class="btn btn-outline-success px-4"><i class="bi bi-plus-lg"></i> add amount</button>
+           </div>
+        </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <h4>Transition History :</h4>
+        <hr>
+        <div class="col-11 mt-3 mx-auto">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">S. No.</th>
+                    <th scope="col">Data & Time</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for tran in transitions %}
+                    {% if tran.status == 'credit' %}
+                        <tr>
+                            <th scope="row">{{tran.counter}}</th>
+                            <td>{{tran.datetime}}</td>
+                            <td>{{tran.status}}</td>
+                            <td class="text-success"><i class="bi bi-plus-lg"></i> <i class="bi bi-currency-dollar"></i>{{tran.amount}}</td>
+                        </tr>
+                    {% endif %}
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  {% endfor %}
+              
+                </tbody>
+              </table> 
+        </div>
+    </div>
+  </div>
+  
+        </div>
+    </div>
+</div>
+{% endblock body %}
