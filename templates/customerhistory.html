@@ -1,0 +1,76 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block body %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2 bg-dark">
+      {% include 'customerdeshboard_sidebar.html' with history='bg-light text-dark' %}
+    </div>
+    <div class="col-10">
+      <div class="container shadow-lg m-4 p-5">
+        <div class="row">
+          <h1 class="display-4 text-center fw-bold text-secondary"> <i class="bi bi-clock-history me2"></i> Your History...</h1>
+          <hr />
+        </div>
+        {% if not historiesforbuy %}
+        <div class="row">
+          <div
+            class="col-6 mx-auto text-center text-danger d-flex flex-column justify-content-center"
+          >
+            <i class="bi bi-folder2-open" style="font-size: 200px"></i>
+            <h1>Empty...</h1>
+            <a href="{% url 'Buy Course' %}">
+              <button
+                class="w-auto mt-4 btn btn-outline-success px-5 fw-semibold large"
+              >
+                <i class="bi bi-cart4 align-middle"></i> Buy Course
+              </button>
+            </a>
+          </div>
+        </div>
+        {% else %}
+        <!--         
+        =======================================================================
+        Approved courses here==================================================
+        ======================================================================= 
+        
+      -->
+        <div class="row py-4">
+          <div class="col-11 mx-auto shadow-lg d-flex justify-content-center">
+          <table class="table">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                <th>Course Name</th>
+                <th>Publish Name</th>
+                <th>Data & Time</th>
+                <th>Course PDF</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for history in historiesforbuy %}
+                <tr class="fs-5">
+                    <th>{{forloop.counter}}</th>
+                    <td><a href="{% url 'About More Course' id=history.course.id %}">{{history.course.title}}</a></td>
+                    <td>{{history.course.user.email}}</td>
+                    <td>{{history.datatime}}</td>
+                    <td>
+                      <a href="{{history.course.course_file.url}}" download=".pdf">
+                        <button class="btn btn-outline-secondary"><i class="bi bi-file-earmark-pdf"></i> download PDF</button>
+                    </a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+        <hr>
+        
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

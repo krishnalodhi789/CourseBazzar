@@ -1,4 +1,4 @@
-from .models import Customer, AddToCart
+from .models import CustomUser, AddToCart
 from django.contrib.auth.models import User
 
 def profile_detail(request):
@@ -8,8 +8,8 @@ def profile_detail(request):
         return  {'customer':customer}
     
     if user.is_authenticated :
-        customer = Customer.objects.get(user_id = user.id)
-        cartcounter =  AddToCart.objects.filter(customer_id = customer.id).count()
+        customer = CustomUser.objects.get(id = user.id)
+        cartcounter =  AddToCart.objects.filter(user_id = customer.id).count()
         context={
             'customer':customer,
             'cartcounter' : cartcounter

@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TIME_ZONE =  'Asia/Kolkata'
+AUTH_USER_MODEL = 'customer.CustomUser'
 
 # Application definition
 

@@ -36,6 +36,7 @@ urlpatterns = [
         myapp_view.publishercourses,
         name="Publisher Courses",
     ),
+    
     # Customer app URLs -------------------------------------------
     path("signup/", customer_view.signupform, name="signup"),
     path("login/", customer_view.customerlogin, name="login"),
@@ -58,6 +59,24 @@ urlpatterns = [
     ), 
     path(
         "customer/deshboard/wallet/", customer_view.wallet, name="wallet"
+    ),
+    
+    path(
+        "customer/deshboard/carts/conform order/", customer_view.conformorder, name="conformorder"
+    ),
+    
+    
+    path(
+        "customer/deshboard/carts/conform order/comformation/", customer_view.conformation, name="conformation"
+    ),
+    
+    
+    path(
+        "customer/deshboard/your history/", customer_view.history, name="history"
+    ),
+    
+    path(
+        "customer/became saller/", customer_view.becamesaller, name="becamesaller"
     ),
 ]
 

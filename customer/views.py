@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import Customer, Course, AddToCart, AmountTransitionHistory
+from .models import  Course, AddToCart, AmountTransitionHistory, DataHistory, CustomUser, Wallet
 
 
 def signupform(request):
@@ -18,22 +18,22 @@ def signupform(request):
         password =request.POST.get('password')
         conform_password =request.POST.get('conform_password')
         if conform_password == password :
-            user = User.objects.create_user(
+            user = CustomUser.objects.create_user(
                 username = email,
                 email =email,
                 first_name=first_name,
                 last_name = last_name,
-                password=password
-            )
-            user.save()
-            customer =Customer.objects.create(
-                user = user,
+                password=password,
                 phone = phone,
                 gender = gender,
             )
-            customer.save()
+            user.save()
+            user_wallet = Wallet.objects.create(
+                user = user
+            )
             return redirect('/')
         else:
+            messages.error(request, 'Password and Conform Password is not same.')
             return redirect('signup')
         
     return render(request, 'signupform.html')
@@ -43,14 +43,7 @@ def customerlogin(request):
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
-        if not User.objects.filter(username = email).exists() :
-            messages.error(request, 'Invalid Email and Password !!')
-            return redirect('login')
-        user = User.objects.get(username = email)
-        if not Customer.objects.filter(user = user).exists() :
-            messages.error(request, 'Invalid Email and Password !!')
-            return redirect('login')
+
         customer = authenticate(username=email, password=password)
         if customer is not None:
             login(request,customer)
@@ -79,9 +72,9 @@ def addcourse(request):
         pdf = request.FILES.get('course_file')
         image =request.FILES.get('image')
         
-        customer = Customer.objects.get(user_id=request.user.id)
+        customer = CustomUser.objects.get(id=request.user.id)
         course = Course.objects.create(
-            customer = customer,
+            user = customer,
             title =title,
             description = description,
             price = price,
@@ -94,9 +87,13 @@ def addcourse(request):
 
 @login_required(login_url='login')
 def uploadedcourses(request):
-    customer = Customer.objects.get(user_id=request.user.id)
-    courses = Course.objects.filter(customer_id=customer.id)
-    context = {'courses':courses}
+    # customer = CustomUser.objects.get(id=request.user.id)
+    approve_courses = Course.objects.filter(user_id=request.user.id,approve=True)
+    not_approve_courses = Course.objects.filter(user_id=request.user.id,approve=False)
+    print(not_approve_courses)
+    context = {'approve_courses':approve_courses,
+               'not_approve_courses':not_approve_courses,
+               }
     return render(request, 'uploadedcourses.html', context)
 
 
@@ -104,15 +101,18 @@ def uploadedcourses(request):
 @login_required(login_url='login')
 def addtocart(request, id):
     backurl = request.META.get("HTTP_REFERER")
-    customer = Customer.objects.get(user_id=request.user.id)
+    user = CustomUser.objects.get(id=request.user.id)
     course = Course.objects.get(id=id)
     
-    if AddToCart.objects.filter(customer=customer,course=course).exists():
-        messages.error(request,"True")
+    if AddToCart.objects.filter(user=user,course=course).exists():
+        messages.error(request,"This course is already exist in your cart.")
         print("already Added...")
         return redirect(backurl)
+    if course.user.email == request.user.email :
+        messages.info(request,"Can't add, Because this is Your course.")
+        return redirect(backurl)
     addtocart = AddToCart.objects.create(
-        customer = customer,
+        user = user,
         course = course
     )
     addtocart.save()
@@ -121,8 +121,8 @@ def addtocart(request, id):
     
 @login_required(login_url='login')
 def customercart(request):
-    customer = Customer.objects.get(user_id=request.user.id)
-    carts = AddToCart.objects.filter(customer_id=customer.id)
+    user = CustomUser.objects.get(id=request.user.id)
+    carts = AddToCart.objects.filter(user_id=user.id)
     context = {'carts':carts}
     return render(request, 'customercart.html', context)
 
@@ -137,19 +137,27 @@ def deletecart(request, id):
 def wallet(request):
     if request.method == "POST":
         amount = request.POST.get('amount')
-        old_balance = request.user.wallet.balance
-        total_balance = old_balance+float(amount)
-        new_balance = request.user.wallet
-        new_balance.balance = total_balance
-        new_balance.save()
-        
+        status = request.POST.get('status')
+        wallet = request.user.wallet
+        if status == 'credit' :
+            total_balance = wallet.balance+float(amount)
+            wallet.balance = total_balance
+        else:
+            if wallet.balance > float(amount):
+                total_balance = wallet.balance-float(amount)
+                wallet.balance = total_balance
+            else:
+                messages.error(request, 'Insufficient Balance...')
+                return redirect("wallet")
+        wallet.save()
         transition = AmountTransitionHistory.objects.create(
             user= request.user,
-            status = 'credit',
+            status = status,
             amount = amount            
         )
         transition.save()
         return redirect("wallet")
+    
     transitions=request.user.amounttransitionhistory.all()
     print(transitions)
     context={
@@ -157,4 +165,68 @@ def wallet(request):
     }
     return render(request, 'wallet.html', context)
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
+def conformorder(request):
+    courses =  request.user.carts.all()
+    total_price =0
+    for cart in courses :
+        total_price += cart.course.price
+    context={
+        'courses':courses,
+        'total_price':total_price
+    }
+    return render(request, 'conformorder.html',context)
+
+
+@login_required(login_url='login')
+def conformation(request):
+    if request.method == "POST":
+        total_amount = request.POST.get('total_amount')
+        user_balance = request.user.wallet
+        if user_balance.balance < float(total_amount):
+            messages.error(request, 'Insufficient Balance..')
+            return redirect("conformorder")
+        user_balance.balance -= float(total_amount)
+        user_balance.save()
+        superadmin = CustomUser.objects.get(username='admin')
+        carts =request.user.carts.all()
+        pdf_urls =[]
+        for cart in carts:
+            publisher = cart.course.user.wallet
+            publisher.balance += cart.course.price*95/100
+            superadmin.wallet.balance += cart.course.price*5/100
+            publisher.save()
+            superadmin.save()
+            course = cart.course
+            datahistory = DataHistory.objects.create(
+                buyer=request.user,
+                course = course
+            )
+            course.sale_counter = course.sale_counter + 1
+            course.save()
+            datahistory.save()
+            pdf_urls.append(cart.course.course_file.url)
+            cart.delete()
+        context={
+            'pdf_urls':pdf_urls
+        }
+        return render(request, 'conformationpage.html',context)
+    
+@login_required(login_url='login/')
+def history(request):
+    historiesforbuy = DataHistory.objects.filter(buyer=request.user)
+    historiesforsale = DataHistory.objects.filter(course_id=request.user.id)
+    context = {
+        'historiesforsale':historiesforsale,
+        'historiesforbuy':historiesforbuy,
+               }
+    return render(request, "customerhistory.html" , context)
+
+
+def becamesaller(request):
+    user = CustomUser.objects.get(id=request.user.id)
+    user.is_saller=True
+    user.save()
+    messages.info(request, "You are now a Saller..")
+    return redirect("addcourse")
+    

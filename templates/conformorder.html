@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 bg-dark">
+            {% include 'customerdeshboard_sidebar.html' with  customercart='bg-light text-dark' %}
+        </div>
+        <div class="col-10">
+            <div class="container shadow-lg m-4 p-5">
+                <div class="row">
+                    <h1 class="display-4 text-center fw-bold text-secondary">
+                        <i class="bi bi-cart4"></i> Conform Order ...</h1>
+                    <hr />
+                </div>
+                <div class="row my-5">
+                    <div class="col-10 mx-auto border p-4">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Course Name</th>
+                                    <th>PDF Name</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cart in courses %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{cart.course.title}}</td>
+                                    <td><button
+                                            class="btn btn-outline-secondary"><i
+                                                class="bi bi-file-earmark-pdf"></i>
+                                            {{cart.course.course_file|cut:'Courses/' }} </button></td>
+                                    <td><i class="bi bi-currency-dollar"></i>
+                                        {{cart.course.price}}.00</td>
+
+                                </tr>
+                                {% endfor %}
+                                <tr class="pt-3">
+                                    <th>Total</th>
+                                    <td></td>
+                                    <td></td>
+                                    <th><i class="bi bi-currency-dollar"></i>
+                                        {{total_price|floatformat:2}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-10 mx-auto d-flex my-4">
+                        <a href="{% url 'customercart' %}">
+                        <button class="btn  btn-secondary px-5 py-2 fw-semibold me-auto"> Go Back</button>
+                        </a>
+                        <form  action="{% url 'conformation' %}" method="post" class="ms-auto">
+                            {% csrf_token %}
+                            <input type="number" name="total_amount" class="d-none" value="{{total_price|floatformat:2}}">
+                         <button class="btn  btn-primary px-5 py-2 fw-semibold me-auto"> Conform </button>
+
+                        </form>
+                      </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for msg in messages %}
+{{msg.tags}}
+    <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
+      <iframe src="https://www.youtube.com/watch?v=PdkQooqoINA" class="d-none" frameborder="0" onload="message()"></iframe>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="msgButton">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"> 
+            <img src="{{user.customer.image.url}}" class="rounded-5" style="height: 30px; width:30px;">
+            {{user.email}}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <p class="text-danger fw-semibold mb-0">
+            <i class="bi bi-exclamation-triangle"></i> {{msg}}
+         </p>
+         <p class="fst-italic mb-0">Please Add Amount..</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+          <a href="{% url 'wallet' %}">
+            <button class="btn btn-outline-success"><i class="bi bi-plus-lg"></i> Add Amount</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endblock body %}
+
+  {% block customJS %}
+  <script>
+    function message(){
+        const msgButton = document.getElementById("msgButton")
+        msgButton.click()
+    }
+  </script>
+
+  {% endblock customJS %}
+
+ 
+
+

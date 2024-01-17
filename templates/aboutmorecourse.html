@@ -61,7 +61,7 @@
         <hr />
         <div class="py-2 mx-auto" style="height: 150px; width: 160px">
           <img
-            src="{{course.customer.image.url}}"
+            src="{{course.user.image.url}}"
             class="h-100 w-100 rounded-circle"
             alt="image"
           />
@@ -74,8 +74,8 @@
           </div>
           <div class="col ps-5">
             <h5>
-              : {{course.customer.user.first_name}}
-              {{course.customer.user.last_name}}
+              : {{course.user.first_name}}
+              {{course.user.last_name}}
             </h5>
           </div>
         </div>
@@ -87,7 +87,7 @@
             </p>
           </div>
           <div class="col ps-5">
-            <h5>: {{course.customer.user.email}}</h5>
+            <h5>: {{course.user.email}}</h5>
           </div>
         </div>
         <div class="row mx-auto">
@@ -97,7 +97,7 @@
             </p>
           </div>
           <div class="col ps-5">
-            <h5>: {{course.customer.phone}}</h5>
+            <h5>: {{course.user.phone}}</h5>
           </div>
         </div>
         <div class="row mx-auto">
@@ -107,7 +107,7 @@
             </p>
           </div>
           <div class="col ps-5">
-            <h5 class="text-capitalize">: {{course.customer.gender}}</h5>
+            <h5 class="text-capitalize">: {{course.user.gender}}</h5>
           </div>
         </div>
         <div class="row mt-3">
@@ -123,4 +123,47 @@
     </div>
   </div>
 </div>
-{% endblock body %}
+
+{% for msg in messages %}
+{{msg.tags}}
+    <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
+      <iframe src="https://www.youtube.com/watch?v=PdkQooqoINA" class="d-none" frameborder="0" onload="message()"></iframe>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="msgButton">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"> 
+            <img src="{{user.image.url}}" class="rounded-5" style="height: 30px; width:30px;">
+            {{user.email}}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{msg}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endblock body %}
+
+  {% block customJS %}
+  <script>
+    function message(){
+        const msgButton = document.getElementById("msgButton")
+        msgButton.click()
+    }
+  </script>
+
+  {% endblock customJS %}

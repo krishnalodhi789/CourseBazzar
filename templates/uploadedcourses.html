@@ -13,17 +13,6 @@
           <h1 class="display-5 text-center h2">Your Uploaded Course ..</h1>
           <hr />
         </div>
-        {% if not courses %}
-        <div class="row">
-          <div class="col-6 mx-auto text-center text-danger d-flex flex-column justify-content-center">
-            <i class="bi bi-folder2-open " style="font-size: 200px;"></i>
-            <h1>Empty...</h1>
-            <a href="{% url 'addcourse' %}">
-              <button class="w-auto mt-4 btn btn-outline-success px-5 fw-semibold large"> <i class="bi bi-plus-lg align-middle"></i> Upload Course</button>
-            </a>
-          </div>
-        </div>
-        {% else %}
         <!--         
         =======================================================================
         Approved courses here==================================================
@@ -35,54 +24,66 @@
            <i class="bi bi-check2-all"></i>Approved Courses :</h3>
           <hr />
         </div>
-        {% for course in courses %}
-         {% if course.approve %}
-        <div class="row py-4">
-          <div
-            class="col-9 mx-auto shadow-lg d-flex justify-content-center p-3"
-          >
-            <div style="width: 35%">
-              <img
-                src="{{course.image.url}}"
-                height="220px"
-                width="100%"
-                alt=""
-              />
-            </div>
-            <div style="width: 40%" class="d-flex">
-              <div class="p-3">
-                <h4>{{course.title}}</h4>
-                <p class="fw-normal" style="font-size: 13px">
-                  {{course.description|truncatechars:249 }}
-                </p>
-                <a href="{{course.course_file.url}}" class="mx-auto">
-                  <button class="btn btn-outline-secondary w-50">
-                    <i class="bi bi-file-earmark-pdf pt-1 pe-1 h4"></i> PDf
-                  </button>
-                </a>
-              </div>
-              <div class="vr"></div>
-            </div>
-            <div
-              class="d-flex flex-column align-items-center justify-content-center ps-2"
-              style="width: 22%"
-            >
-              <div class="ms-auto">
-                <i class="bi bi-person-lines-fill pe-1"></i>
-                <div class="vr"></div>
-                <i class="bi bi-suit-heart pe-1"></i>
-              </div>
-              <h5 class="text-center">
-                <i class="bi bi-currency-rupee"></i>{{course.price}}
-              </h5>
-              <p class="small fw-semibold mb-1">{{course.sale_counter}} Sales</p>
-              <p class="small text-center mb-1">Uploaded : <br>{{course.published_datetime}}</p>
-              <p class="small text-center mb-1">Approval : <br>{{course.approval_datetime}}</p>
-              <button class="btn btn-outline-success mt-auto">Approved</button>
-            </div>
-          </div>
-        </div>
-        {% endif %} {% endfor %}
+
+        {% if not approve_courses %}
+        <div class="row">
+         <div class="col-6 mx-auto text-center text-success d-flex flex-column justify-content-center">
+           <i class="bi bi-folder2-open " style="font-size: 100px;"></i>
+           <h3>Empty...</h3>
+           <a href="{% url 'addcourse' %}">
+             <button class="w-auto mt-4 btn btn-outline-success px-5 fw-semibold large"> <i class="bi bi-plus-lg align-middle"></i> Upload Course</button>
+           </a>
+         </div>
+       </div>         
+         {% else %}
+         {% for course in approve_courses %}
+         <div class="row py-4">
+           <div
+             class="col-9 mx-auto shadow-lg d-flex justify-content-center p-3"
+           >
+             <div style="width: 35%">
+               <img
+                 src="{{course.image.url}}"
+                 height="220px"
+                 width="100%"
+                 alt=""
+               />
+             </div>
+             <div style="width: 40%" class="d-flex">
+               <div class="p-3">
+                 <h4>{{course.title}}</h4>
+                 <p class="fw-normal" style="font-size: 13px">
+                   {{course.description|truncatechars:249 }}
+                 </p>
+                 <a href="{{course.course_file.url}}" class="mx-auto">
+                   <button class="btn btn-outline-secondary w-50">
+                     <i class="bi bi-file-earmark-pdf pt-1 pe-1 h4"></i> PDf
+                   </button>
+                 </a>
+               </div>
+               <div class="vr"></div>
+             </div>
+             <div
+               class="d-flex flex-column align-items-center justify-content-center ps-2"
+               style="width: 22%"
+             >
+               <div class="ms-auto">
+                 <i class="bi bi-person-lines-fill pe-1"></i>
+                 <div class="vr"></div>
+                 <i class="bi bi-suit-heart pe-1"></i>
+               </div>
+               <h5 class="text-center">
+                 <i class="bi bi-currency-rupee"></i>{{course.price}}
+               </h5>
+               <p class="small fw-semibold mb-1">{{course.sale_counter}} Sales</p>
+               <p class="small text-center mb-1">Uploaded : <br>{{course.published_datetime}}</p>
+               <p class="small text-center mb-1">Approval : <br>{{course.approval_datetime}}</p>
+               <button class="btn btn-outline-success mt-auto">Approved</button>
+             </div>
+           </div>
+         </div>
+         {% endfor %}
+         {% endif%}
 <!--         
         =======================================================================
         Not approved courses here==================================================
@@ -92,55 +93,63 @@
             <i class="bi bi-x-circle"></i> Not approved Courses :</h3>
           <hr />
         </div>
-        
-        {% for course in courses %}
-         {% if not course.approve %}
-        <div class="row py-4">
-          <div
-            class="col-9 mx-auto shadow-lg d-flex justify-content-center p-3"
-          >
-            <div style="width: 35%">
-              <img
-                src="{{course.image.url}}"
-                height="220px"
-                class="w-100"
-                alt="Image"
-              />
-            </div>
-            <div style="width: 40%" class="d-flex">
-              <div class="p-3">
-                <h4>{{course.title}}</h4>
-                <p class="fw-normal text-justify" style="font-size: 13px">
-                  {{course.description|truncatechars:249 }}
-                </p>
-                <a href="{{course.course_file.url}}" class="mx-auto">
-                  <button class="btn btn-outline-secondary w-50">
-                    <i class="bi bi-file-earmark-pdf pt-1 pe-1 h4"></i> PDf
-                  </button>
-                </a>
-              </div>
-              <div class="vr"></div>
-            </div>
+        {% if not not_approve_courses %}
+        <div class="row">
+          <div class="col-6 mx-auto text-center text-danger d-flex flex-column justify-content-center">
+            <i class="bi bi-folder2-open " style="font-size: 100px;"></i>
+            <h3>Empty...</h3>
+            <a href="{% url 'addcourse' %}">
+              <button class="w-auto mt-4 btn btn-outline-success px-5 fw-semibold large"> <i class="bi bi-plus-lg align-middle"></i> Upload Course</button>
+            </a>
+          </div>
+        </div> 
+        {% else %}
+          {% for course in not_approve_courses %}
+          <div class="row py-4">
             <div
-              class="d-flex flex-column align-items-center justify-content-center"
-              style="width: 22%"
+              class="col-9 mx-auto shadow-lg d-flex justify-content-center p-3"
             >
-              <div class="ms-auto">
-                <i class="bi bi-person-lines-fill pe-1"></i>
-                <div class="vr"></div>
-                <i class="bi bi-suit-heart pe-1"></i>
+              <div style="width: 35%">
+                <img
+                  src="{{course.image.url}}"
+                  height="220px"
+                  class="w-100"
+                  alt="Image"
+                />
               </div>
-              <h5 class="text-center">
-                <i class="bi bi-currency-rupee"></i>{{course.price}}
-              </h5>
-              <p class="small fw-semibold mb-1">{{course.sale_counter}} Sales</p>
-              <p class="small text-center">Uploaded : <br> {{course.published_datetime}}</p>
-              <button class="btn btn-outline-danger mt-auto">Not approved</button>
+              <div style="width: 40%" class="d-flex">
+                <div class="p-3">
+                  <h4>{{course.title}}</h4>
+                  <p class="fw-normal text-justify" style="font-size: 13px">
+                    {{course.description|truncatechars:249 }}
+                  </p>
+                  <a href="{{course.course_file.url}}" class="mx-auto">
+                    <button class="btn btn-outline-secondary w-50">
+                      <i class="bi bi-file-earmark-pdf pt-1 pe-1 h4"></i> PDf
+                    </button>
+                  </a>
+                </div>
+                <div class="vr"></div>
+              </div>
+              <div
+                class="d-flex flex-column align-items-center justify-content-center"
+                style="width: 22%"
+              >
+                <div class="ms-auto">
+                  <i class="bi bi-person-lines-fill pe-1"></i>
+                  <div class="vr"></div>
+                  <i class="bi bi-suit-heart pe-1"></i>
+                </div>
+                <h5 class="text-center">
+                  <i class="bi bi-currency-rupee"></i>{{course.price}}
+                </h5>
+                <p class="small fw-semibold mb-1">{{course.sale_counter}} Sales</p>
+                <p class="small text-center">Uploaded : <br> {{course.published_datetime}}</p>
+                <button class="btn btn-outline-danger mt-auto">Not approved</button>
+              </div>
             </div>
           </div>
-        </div>
-        {% endif %} 
-        {% endfor %}
+          {% endfor %}
         {% endif %} 
 
       </div>

@@ -23,12 +23,12 @@
                 <div style="width: 40%" class="d-flex">
                 <div class="px-2">
                     <img
-                    src="{{course.customer.image.url}}"
+                    src="{{course.user.image.url}}"
                     alt=""
                     style="width: 30px; height: 30px"
                     class="rounded-circle"
                     />
-                    {{course.customer.user.email}}
+                    {{course.user.email}}
                     <h4>{{course.title}}</h4>
                     <p class="fw-normal" style="font-size: 13px">
                     {{course.description|truncatechars:200 }}
@@ -73,9 +73,54 @@
         </div>
         {% endif %} {% endfor %}
     </div>
+
+
+
 </div>
 
-
+{% for msg in messages %}
+{{msg.tags}}
+    <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
+      <iframe src="https://www.youtube.com/watch?v=PdkQooqoINA" class="d-none" frameborder="0" onload="message()"></iframe>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="msgButton">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"> 
+            <img src="{{user.image.url}}" class="rounded-5" style="height: 30px; width:30px;">
+            {{user.email}}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{msg}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
   {% endblock body %}
 
+  {% block customJS %}
+  <script>
+    function message(){
+        const msgButton = document.getElementById("msgButton")
+        msgButton.click()
+    }
+  </script>
+
+  {% endblock customJS %}
+
+ 
 

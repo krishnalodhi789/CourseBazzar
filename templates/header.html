@@ -21,7 +21,7 @@
        <div>
         {% if user.is_authenticated %}
         <a href="{% url 'customercart' %}" class="text-decoration-none">
-          <button  class="btn position-relative me-4 px-3">
+          <button  class="btn position-relative me-2 px-3">
             <i class="bi bi-cart-plus fs-3"></i>
             {% if cartcounter %}
             <span class="position-absolute translate-middle badge rounded-pill bg-info" style="top:30%; left:90%">
@@ -31,10 +31,17 @@
             {% endif %}
           </button>
         </a>
-          <a href="{% url 'customerprofile' %}">
+        {% if not user.is_saller %}
+        <a href="{% url 'becamesaller' %}" class="text-decoration-none">
+          <button class="btn btn-outline-secondary">
+            Became a saller
+          </button>
+        </a>
+        {% endif %}
+          <a href="{% url 'customerprofile' %}" class="text-decoration-none">
             <button class="btn btn-outline-secondary">
-              <img src="{{customer.image.url}}" alt="" style="width: 30px; height:30px" class="rounded-circle">
-              {{user.email}}
+              <img src="{{customer.image.url}}" alt="" style="width: 25px; height:22px" class="rounded-circle">
+              {{user.email|truncatechars:8}}
             </button>
           </a>
           {% else %}

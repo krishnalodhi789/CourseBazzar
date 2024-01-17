@@ -52,12 +52,12 @@
                 <div class="px-2">
                   <a href="{% url 'Publisher Courses' id=cart.course.id %}" class="text-decoration-none">
                     <img
-                    src="{{cart.course.customer.image.url}}"
+                    src="{{cart.course.user.image.url}}"
                     alt=""
                     style="width: 30px; height: 30px"
                     class="rounded-circle"
                   />
-                  {{cart.customer.user.email}}
+                  {{cart.course.user.email}}
                   </a>
                   <h4>{{cart.course.title}}</h4>
                   <p class="fw-normal mb-0" style="font-size: 13px">
@@ -124,6 +124,10 @@
         {% endfor %}
         <hr>
         
+
+        <div class="row text-center"><a href="{% url 'conformorder' %}">
+          <button class="btn btn-outline-primary mx-auto w-auto px-5 py-1 fw-semibold fs-5"> Place Order <i class="bi bi-bag-plus ms-2"></i></button>
+          </a>
         {% endif %}
       </div>
     </div>

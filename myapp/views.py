@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import resolve
-from customer.models import Course, Customer
+from customer.models import Course, CustomUser
 
 def home(request):
     return render(request, 'index.html',{"home":True})
@@ -25,13 +25,13 @@ def aboutmorecourse(request, id):
 
 def publishercourses(request, id):    
     backurl = request.META.get('HTTP_REFERER')
-    backcourse = Course.objects.get(id=id)
-    customer = Customer.objects.get(id=backcourse.customer_id)
-    customercourses = Course.objects.filter(customer_id =customer.id)
+    course = Course.objects.get(id=id)
+    customer = CustomUser.objects.get(id=course.user_id)
+    usercourses = Course.objects.filter(user_id =customer.id)
     context={
         'backurl':backurl,
-        'backcourse':backcourse,
-        'customercourses':customercourses,
+        'course':course,
+        'usercourses':usercourses,
         'buycourse':True
     }
     return render(request, 'customercourses.html', context)

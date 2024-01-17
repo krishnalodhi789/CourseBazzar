@@ -18,17 +18,18 @@
   <div class="row mt-5">
     <h4>
       <img
-        src="{{backcourse.customer.image.url}}"
+        src="{{course.user.image.url}}"
         alt=""
         style="width: 30px; height: 30px"
         class="rounded-circle"
       />
-      <i>{{backcourse.customer.user.email}}</i>
+      <i>{{course.user.email}}</i>
     </h4>
     <hr />
   </div>
 
-  {% for course in customercourses %} {% if course.approve %}
+  {% for course in customercourses %} 
+  {% if course.approve %}
   <div class="row py-4">
     <div class="col-11 mx-auto shadow-lg d-flex justify-content-center p-3">
       <div class="row">

@@ -1,5 +1,18 @@
 {% extends "base.html" %} {% load static %} {% block body %}
-
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-5 mx-auto">
+      {% for msg in messages %}
+      {% if msg.tags == "error" %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Something Wrong!</strong> <br/>{{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
 <div class="container p-5 my-3 register">
   <div class="row">
     <div class="col-md-3 register-left">
@@ -13,6 +26,7 @@
     </a>
     </div>
     <div class="col-6 register-right p-2">
+    
       <div class="py-3">
         <h2 class="text-center">
           <i class="bi bi-person-bounding-box text-info"></i>

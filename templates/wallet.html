@@ -1,77 +1,187 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block body %}
+{% extends "base.html" %} {% load static %} {% block body %}
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-2 bg-dark">
-            {% include 'customerdeshboard_sidebar.html' with wallet='bg-light text-dark' %}
-        </div>
-        <div class="col-10">
-            
-<div class="container shadow-lg m-4 px-5 pb-5">
-    <div class="row py-4">
-     <h1 class="display-5 text-center fw-semibold"><i class="bi bi-wallet-fill"></i> </h1>
-     <h1 class="display-5 text-center fw-semibold">Your wallet </h1>
-     <hr>
+  <div class="row">
+    <div class="col-2 bg-dark">
+      {% include 'customerdeshboard_sidebar.html' with wallet='bg-light   text-dark' %}
     </div>
-    <div class="row">
-        <div class="col-4 p-3 border mx-auto shadow">
-            <form action="" method="POST">
-                {% csrf_token %}
-           <div class="text-center">
-            <span class="fw-semibold me-5">Your balance :</span>
-            <span class="fw-semibold ms-auto"><i class="bi bi-currency-dollar"></i> {{user.wallet.balance}}</span>
-           </div>
-            <div class="text-center mt-4 border p-2 w-75 mx-auto rounded-5">
-                <i class="bi bi-currency-dollar"></i>
-               <input type="number" name="amount" class="w-75 addbalancefield" placeholder="Enter amount" >
-           </div>
-           <div class="text-center mt-4">
-               <button class="btn btn-outline-success px-4"><i class="bi bi-plus-lg"></i> add amount</button>
-           </div>
-        </form>
+    <div class="col-10">
+      <div class="container shadow-lg m-4 px-5 pb-5">
+        <div class="row py-4">
+          <h1 class="display-5 text-center fw-semibold">
+            <i class="bi bi-wallet-fill"></i>
+          </h1>
+          <h1 class="display-5 text-center fw-semibold">Your Wallet</h1>
+          <hr />
         </div>
-    </div>
-    <div class="row mt-5">
-        <h4>Transition History :</h4>
-        <hr>
-        <div class="col-11 mt-3 mx-auto">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">S. No.</th>
-                    <th scope="col">Data & Time</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for tran in transitions %}
+        <div class="row">
+          <div class="col-4 p-3 border mx-auto shadow">
+            <form action="" method="POST" id="amoutForm">
+              {% csrf_token %}
+              <div class="text-center">
+                <span class="fw-semibold fs-5 me-5">Your balance :</span>
+                <span class="fw-semibold fs-5 ms-auto"
+                  ><i class="bi bi-currency-dollar"></i>
+                  {{user.wallet.balance|floatformat:2}}</span
+                >
+                <hr>
+              </div>
+              <div class="text-center mt-4 border p-2 w-75 mx-auto rounded-5">
+                <i class="bi bi-currency-dollar text-secondary"></i>
+                <input
+                  type="number"
+                  name="amount"
+                  id="amount"
+                  class="w-75 addbalancefield"
+                  placeholder="Enter amount"
+                  required
+                />
+                <input
+                  type="text"
+                  name="status"
+                  id="statusField"
+                  class="d-none"
+                />
+              </div>
+              <div class="mt-4 d-flex">
+                <button
+                  type="button"
+                  class="btn btn-outline-success px-4"
+                  onclick="credit()"
+                >
+                  <i class="bi bi-plus-lg"></i> Deposit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-success px-4 ms-auto"
+                  onclick="deposit()"
+                >
+                  <i class="bi bi-box-arrow-left"></i> Withdraw
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <h4 class="text-secondary"><i class="bi bi-clock-history"></i>  Transition History : </h4>
+          <hr />
+          <div class="col-11 mt-3 mx-auto">
+            <table class="table" id="PDF-table">
+              <thead>
+                <tr>
+                  <th scope="col">S. No.</th>
+                  <th scope="col">Data & Time</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for tran in transitions %} 
                     {% if tran.status == 'credit' %}
                         <tr>
-                            <th scope="row">{{tran.counter}}</th>
-                            <td>{{tran.datetime}}</td>
-                            <td>{{tran.status}}</td>
-                            <td class="text-success"><i class="bi bi-plus-lg"></i> <i class="bi bi-currency-dollar"></i>{{tran.amount}}</td>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{tran.datetime}}</td>
+                        <td>{{tran.status|title}}</td>
+                        <td class="text-success">
+                            <i class="bi bi-plus-lg"></i>
+                            <i class="bi bi-currency-dollar"></i>{{tran.amount|floatformat:2}}
+                        </td>
                         </tr>
-                    {% endif %}
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  {% endfor %}
-              
-                </tbody>
-              </table> 
+                    {% else %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{tran.datetime}}</td>
+                            <td>{{tran.status|title}}</td>
+                            <td class="text-danger text-capitalize">
+                                <i class="bi bi-dash"></i>
+                                <i class="bi bi-currency-dollar"></i>{{tran.amount|floatformat:2}}
+                            </td>
+                        </tr>
+                        {% endif %}
+                        
+                        {% endfor %}
+                    </tbody>
+            </table>
+          </div>
         </div>
+    </div>
+    
+    
+</div>
+</div>
+</div>
+
+
+{% for msg in messages %}
+{{msg.tags}}
+    <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
+      <iframe src="https://www.youtube.com/watch?v=PdkQooqoINA" class="d-none" frameborder="0" onload="message()"></iframe>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="msgButton">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"> 
+            <img src="{{user.image.url}}" class="rounded-5" style="height: 30px; width:30px;">
+            {{user.email}}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p class="text-danger fw-semibold mb-0">
+                <i class="bi bi-exclamation-triangle"></i> {{msg}}
+             </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
     </div>
   </div>
+  {% endfor %}
+  {% endblock body %}
+
+ 
+{% block customJS %}
+<script>
+    function credit() {
+    const form = document.getElementById("amoutForm");
+    const amount = document.getElementById("amount");
+    if (amount.value == ''){
+        amount.focus()
+    }
+    else{
+          const status = document.getElementById("statusField");
+    status.value = "credit";
+    form.submit();
+    }
   
-        </div>
-    </div>
-</div>
-{% endblock body %}
+  }
+
+  function deposit() {
+    const form = document.getElementById("amoutForm");
+    const amount = document.getElementById("amount");
+    if (amount.value == ''){
+        amount.focus()
+    }
+    else{
+    const status = document.getElementById("statusField");
+    status.value = "deposit";
+    form.submit();
+    }
+  }
+
+
+  function message(){
+    const msgButton = document.getElementById("msgButton")
+    msgButton.click()
+}
+</script>
+{% endblock customJS %}
