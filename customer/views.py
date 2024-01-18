@@ -108,9 +108,7 @@ def addtocart(request, id):
         messages.error(request,"This course is already exist in your cart.")
         print("already Added...")
         return redirect(backurl)
-    if course.user.email == request.user.email :
-        messages.info(request,"Can't add, Because this is Your course.")
-        return redirect(backurl)
+   
     addtocart = AddToCart.objects.create(
         user = user,
         course = course
@@ -123,6 +121,7 @@ def addtocart(request, id):
 def customercart(request):
     user = CustomUser.objects.get(id=request.user.id)
     carts = AddToCart.objects.filter(user_id=user.id)
+ 
     context = {'carts':carts}
     return render(request, 'customercart.html', context)
 
@@ -139,7 +138,10 @@ def wallet(request):
         amount = request.POST.get('amount')
         status = request.POST.get('status')
         wallet = request.user.wallet
-        if status == 'credit' :
+        if float(amount)<0:
+            messages.error(request, 'Deposit Amount should be greater than 0.')
+            return redirect("wallet")
+        if status == 'deposit' :
             total_balance = wallet.balance+float(amount)
             wallet.balance = total_balance
         else:

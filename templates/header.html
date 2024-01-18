@@ -1,5 +1,94 @@
 {% load static %}
-
+<div class="container-fluid px-5">
+  <div class="row px-3 py-4">
+      <div class="col-lg-2 col-sm-5 pt-3 d-flex text-center">
+          <span>
+              <img src="{% static 'images/cb-logo.png' %}" width="40px" height="40px" alt="" srcset="">
+          </span>
+          <span class="h-100 position-relative">
+            <p class="mb-0  pb-0 fw-bold position-absolute" style="top:-10px; font-size:23px">Course</p>
+            <p class="mb-0  pb-0 fw-bold position-absolute" style="top:12px; left:15px; font-size:23px">Bazzar</p>
+          </span>
+      </div>
+      <div class="col-lg-5 col-sm-10  pt-3">
+          <div class="border rounded-2 p-0 position-relative">
+              <input type="text" class="border-0 m-1 p-2 w-50 fw-semibold" placeholder="search for courses..." name="" id="">
+              <div class="vr h-100"></div>
+              <button class="btn text-secondary fw-semibold ps-3">All Categories.. <i class="bi bi-chevron-down ms-3"></i></button>
+              <button class="btn btn-primary position-absolute top-0 end-0 h-100 px-3 fs-4 rounded-0 text-light"><i class="bi bi-search"></i></button>
+          </div>
+      </div>
+      <div class="col--lg5  col-sm-5  d-flex">
+        <a href="">
+          <button class=" btn ">
+            <div class="mx-3 d-flex  align-items-center">
+              <div>
+                <i class="bi bi-suit-heart fs-1 text-secondary align-center"></i>
+              </div>
+              <div class="ps-2">
+                <p class="mb-0 fw-semibold text-dark ">
+                  Wishlist
+                </p>
+                <p class="mb-0 fw-semibold text-secondary">
+                  112
+                </p>
+              </div>
+            </div>
+          </button>
+        </a>
+        <a href="{% url 'customercart' %}">
+          <button class="btn">
+            <div class="mx-3 d-flex  align-items-center">
+             <div class=" position-relative">
+               <i class="bi bi-handbag  fs-1 text-secondary align-center "></i>
+               {% if cartcounter %}
+               <span class="position-absolute badge translate-middle  rounded-pill bg-info" style="top: 68%;
+               left: 83%;">
+                 {{cartcounter}}
+                {% endif %}
+               </div>
+             <div class="ps-2">
+               <p class="mb-0 fw-semibold text-dark ">
+                 Cart
+               </p>
+               <p class="mb-0 fw-semibold text-secondary fs-6">
+                 <i class="bi bi-currency-dollar "></i>{{total_price}}
+               </p>
+             </div>
+           </div>
+          </button>
+        </a>
+        {% if user.is_authenticated %}
+ 
+        {% if not user.is_saller %}
+       <div class="border d-flex  align-items-center ms-auto">
+        <a href="{% url 'becamesaller' %}" class="text-decoration-none">
+          <button class="btn btn-outline-secondary">
+            Became a saller
+          </button>
+        </a>
+       </div>
+        {% endif %}
+          <div class="border  d-flex  align-items-center ms-auto">
+            <a href="{% url 'customerprofile' %}" class="text-decoration-none">
+              <button class="btn btn-outline-secondary">
+                <img src="{{customer.image.url}}" alt="" style="width: 25px; height:22px" class="rounded-circle">
+                {{user.email|truncatechars:8}}
+              </button>
+            </a>
+          </div>
+          {% else %}
+        <button class="btn btn-info">
+          <a href="/login/" class='fw-bold text-light'>Sign In</a>
+        </button>
+        
+        <button class="btn btn-info ">
+          <a href="/signup/" class='fw-bold text-light'>Sign Up</a>
+        </button>
+        {% endif %}
+      </div>
+  </div>
+</div>
 <nav class="navbar navbar-expand-lg bg-light px-4 py-1">
     <div class="container-fluid">
       <a class="navbar-brand h5" style="font-family: 'Pacifico', cursive;" href="/">
@@ -26,7 +115,6 @@
             {% if cartcounter %}
             <span class="position-absolute translate-middle badge rounded-pill bg-info" style="top:30%; left:90%">
              {{cartcounter}}
-              <span class="visually-hidden">unread messages</span>
             </span>
             {% endif %}
           </button>

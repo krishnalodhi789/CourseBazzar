@@ -47,14 +47,14 @@
                 <button
                   type="button"
                   class="btn btn-outline-success px-4"
-                  onclick="credit()"
+                  onclick="deposit()"
                 >
                   <i class="bi bi-plus-lg"></i> Deposit
                 </button>
                 <button
                   type="button"
                   class="btn btn-outline-success px-4 ms-auto"
-                  onclick="deposit()"
+                  onclick="withdral()"
                 >
                   <i class="bi bi-box-arrow-left"></i> Withdraw
                 </button>
@@ -77,7 +77,7 @@
               </thead>
               <tbody>
                 {% for tran in transitions %} 
-                    {% if tran.status == 'credit' %}
+                    {% if tran.status == 'deposit' %}
                         <tr>
                         <th scope="row">{{forloop.counter}}</th>
                         <td>{{tran.datetime}}</td>
@@ -151,7 +151,7 @@
  
 {% block customJS %}
 <script>
-    function credit() {
+    function deposit() {
     const form = document.getElementById("amoutForm");
     const amount = document.getElementById("amount");
     if (amount.value == ''){
@@ -159,13 +159,13 @@
     }
     else{
           const status = document.getElementById("statusField");
-    status.value = "credit";
+    status.value = "deposit";
     form.submit();
     }
   
   }
 
-  function deposit() {
+  function withdral() {
     const form = document.getElementById("amoutForm");
     const amount = document.getElementById("amount");
     if (amount.value == ''){
@@ -173,7 +173,7 @@
     }
     else{
     const status = document.getElementById("statusField");
-    status.value = "deposit";
+    status.value = "withdral";
     form.submit();
     }
   }

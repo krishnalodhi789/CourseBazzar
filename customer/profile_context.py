@@ -10,9 +10,15 @@ def profile_detail(request):
     if user.is_authenticated :
         customer = CustomUser.objects.get(id = user.id)
         cartcounter =  AddToCart.objects.filter(user_id = customer.id).count()
+        carts =  AddToCart.objects.filter(user_id = customer.id)
+        total_price = 0.00
+        for cart in carts:
+            total_price += cart.course.price
+        print(total_price)
         context={
             'customer':customer,
-            'cartcounter' : cartcounter
+            'cartcounter' : cartcounter,
+            'total_price':total_price
         }       
     else:
         context={
