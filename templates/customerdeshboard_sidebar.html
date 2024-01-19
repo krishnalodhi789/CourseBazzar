@@ -59,11 +59,11 @@
       <hr class="text-light m-0" />
 
       <a
-        href="{% url 'history' %}"
-        class="fw-semibold text-light {{history}} w-100"
-        ><li class="align-center p-2 {{history}}">
+        href="{% url 'buyinghistory' %}"
+        class="fw-semibold text-light {{buyinghistory}} w-100"
+        ><li class="align-center p-2 {{buyinghistory}}">
           <i
-            class="bi bi-clock-history fw-semibold text-light h5 pe-2 {{history}}"
+            class="bi bi-clock-history fw-semibold text-light h5 pe-2 {{buyinghistory}}"
           ></i>
          Buying History
         </li></a
@@ -71,8 +71,9 @@
       <hr class="text-light m-0" />
     </ul>
 
-    <h3 class="text-light mt-5">As a Saller</h3>
+    
     {% if user.is_saller %}
+    <h3 class="text-light mt-5">As a Saller</h3>
     <ul class="ps-1" type="none">
 
       <a
@@ -100,11 +101,11 @@
 
 
       <a
-        href="{% url 'history' %}"
-        class="fw-semibold text-light {{history}} w-100"
-        ><li class="align-center p-2 {{history}}">
+        href="{% url 'sellinghistory' %}"
+        class="fw-semibold text-light {{sellinghistory}} w-100"
+        ><li class="align-center p-2 {{sellinghistory}}">
           <i
-            class="bi bi-clock-history fw-semibold text-light h5 pe-2 {{history}}"
+            class="bi bi-clock-history fw-semibold text-light h5 pe-2 {{sellinghistory}}"
           ></i>
          Salling History
         </li></a

@@ -3,7 +3,7 @@
 
 
 {% block body %}
-<section id="hero" class="d-flex align-items-center justify-content-center">
+{% comment %} <section id="hero" class="d-flex align-items-center justify-content-center">
     <div class="container" data-aos="fade-up">
 
       <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
@@ -47,5 +47,21 @@
       </div>
 
     </div>
-  </section><!-- End Hero -->
+  </section><!-- End Hero --> {% endcomment %}
+<div class="container my-5">
+
+  <div class="row justify-content-center">
+    <div class="col-5 d-flex-flex-column">
+      <h1 class="display-4 fw-bold text-info">
+        {{hotcourse.title}}
+      </h1>
+      <p>{{hotcourse.description|truncatechars:150}}</p>
+    </div>
+    <div class="col-5">
+      <img src="{{hotcourse.image.url}}" class="rounded-5" height="300px" width="100%">
+    </div>
+  </div>
+  
+</div>
+
 {% endblock body %}

@@ -215,16 +215,18 @@ def conformation(request):
         return render(request, 'conformationpage.html',context)
     
 @login_required(login_url='login/')
-def history(request):
+def buyinghistory(request):
     historiesforbuy = DataHistory.objects.filter(buyer=request.user)
     historiesforsale = DataHistory.objects.filter(course_id=request.user.id)
     context = {
         'historiesforsale':historiesforsale,
         'historiesforbuy':historiesforbuy,
                }
-    return render(request, "customerhistory.html" , context)
+    return render(request, "buyinghistory.html" , context)
 
 
+
+@login_required(login_url='login/')
 def becamesaller(request):
     user = CustomUser.objects.get(id=request.user.id)
     user.is_saller=True
@@ -232,3 +234,13 @@ def becamesaller(request):
     messages.info(request, "You are now a Saller..")
     return redirect("addcourse")
     
+    
+    
+    
+@login_required(login_url='login/')
+def sellinghistory(request):
+    historiesforsale = DataHistory.objects.filter(course_id=request.user.id)
+    context = {
+        'historiesforsale':historiesforsale,
+               }
+    return render(request, "sellinghistory.html" , context)

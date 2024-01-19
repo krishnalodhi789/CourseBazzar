@@ -3,10 +3,24 @@ from django.urls import resolve
 from customer.models import Course, CustomUser
 
 def home(request):
-    return render(request, 'index.html',{"home":True})
+    courses = Course.objects.all()
+    max_sale = 0
+    for course in courses:
+        if max_sale<course.sale_counter:
+            max_sale=course.sale_counter
+            
+    hotcourse = Course.objects.get(sale_counter=max_sale)
+    
+    
+    context={
+        'hotcourse':hotcourse,
+        "home":True
+    }         
+    print(hotcourse)
+    return render(request, 'index.html',context)
 
 def buycourse(request):
-    courses= Course.objects.all()
+    courses= Course.objects.all().order_by("-id")
     context={
         "buycourse":True,
         "courses":courses
@@ -35,3 +49,10 @@ def publishercourses(request, id):
         'buycourse':True
     }
     return render(request, 'customercourses.html', context)
+
+
+def contact(request):
+    context={
+        'contact':True
+    }
+    return render(request, 'contactpage.html', context)

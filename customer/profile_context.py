@@ -14,7 +14,6 @@ def profile_detail(request):
         total_price = 0.00
         for cart in carts:
             total_price += cart.course.price
-        print(total_price)
         context={
             'customer':customer,
             'cartcounter' : cartcounter,
