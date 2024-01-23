@@ -104,6 +104,84 @@
             </table>
           </div>
         </div>
+        {% if buyhistory or salehistory %}
+        <div class="row mt-5 shadow-lg">
+         <div class=" py-3">
+          <h4 class="text-secondary text-center"><i class="bi bi-clock-history"></i> Course Amount History : </h4>
+
+         </div>
+
+          {% if buyhistory %}
+          <div class="col-12 mt-3 mx-auto">
+            <h5>Selling Histories...</h5>
+            <hr>
+            <div class="px-4">
+            <table class="table " id="PDF-table">
+              <thead>
+                <tr>
+                  <th scope="col">S. No.</th>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">Data & Time</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for transition in buyhistory %}
+                        <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{transition.course.title}}</td>
+                        <td>{{transition.datetime}}</td>
+                        <td>Buy</td>
+                        <td class="text-danger">
+                            <i class="bi bi-dash-lg"></i>
+                            <i class="bi bi-currency-dollar"></i>{{transition.course.price|floatformat:2}}
+                        </td>
+                        </tr>
+                 
+                        {% endfor %}
+                    </tbody>
+            </table>
+          </div>
+          </div>
+          {% endif %}
+
+          {% if salehistory %}
+          <div class="col-12 mt-3 mx-auto">
+            <h5>Buying Histories...</h5>
+            <hr>
+            <div class="px-4">
+            <table class="table" id="PDF-table">
+              <thead>
+                <tr>
+                  <th scope="col">S. No.</th>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">Data & Time</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for transition in salehistory %}
+                        <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{transition.course.title}}</td>
+                        <td>{{transition.datetime}}</td>
+                        <td>Sale</td>
+                        <td class="text-success">
+                            <i class="bi bi-plus-lg"></i>
+                            <i class="bi bi-currency-dollar"></i>{{transition.course.price|floatformat:2}}
+                        </td>
+                        </tr>
+                 
+                        {% endfor %}
+                    </tbody>
+            </table>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
     </div>
     
     

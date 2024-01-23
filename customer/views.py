@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import  Course, AddToCart, AmountTransitionHistory, DataHistory, CustomUser, Wallet
+from .models import  Course, AddToCart, AmountTransitionHistory,SaleHistory, BuyHistory, CustomUser, Wallet
 
 
 def signupform(request):
@@ -101,19 +101,20 @@ def uploadedcourses(request):
 @login_required(login_url='login')
 def addtocart(request, id):
     backurl = request.META.get("HTTP_REFERER")
-    user = CustomUser.objects.get(id=request.user.id)
     course = Course.objects.get(id=id)
     
-    if AddToCart.objects.filter(user=user,course=course).exists():
+    if request.user.buyhistories.filter(course_id=id).exists():
+        messages.error(request,"You have already buy of this course.")
+        return redirect(backurl)
+    
+    if AddToCart.objects.filter(user=request.user,course=course).exists():
         messages.error(request,"This course is already exist in your cart.")
         print("already Added...")
         return redirect(backurl)
-   
     addtocart = AddToCart.objects.create(
-        user = user,
+        user = request.user,
         course = course
     )
-    addtocart.save()
     return redirect(backurl)
     
     
@@ -160,10 +161,16 @@ def wallet(request):
         transition.save()
         return redirect("wallet")
     
+
     transitions=request.user.amounttransitionhistory.all()
-    print(transitions)
+    salehistory =SaleHistory.objects.filter(seller=request.user)
+    buyhistory =BuyHistory.objects.filter(buyer=request.user)
+
     context={
-        'transitions':transitions
+        'transitions':transitions,
+        "salehistory":salehistory,
+        "buyhistory":buyhistory
+        
     }
     return render(request, 'wallet.html', context)
 
@@ -194,21 +201,26 @@ def conformation(request):
         carts =request.user.carts.all()
         pdf_urls =[]
         for cart in carts:
-            publisher = cart.course.user.wallet
-            publisher.balance += cart.course.price*95/100
+            seller =cart.course.user
+            saller_wallet = seller.wallet
+            saller_wallet.balance += cart.course.price*95/100
             superadmin.wallet.balance += cart.course.price*5/100
-            publisher.save()
+            saller_wallet.save()
             superadmin.save()
             course = cart.course
-            datahistory = DataHistory.objects.create(
+            buyhistory = BuyHistory.objects.create(
                 buyer=request.user,
+                course = course
+            )
+            salehistory = SaleHistory.objects.create(
+                seller=seller,
                 course = course
             )
             course.sale_counter = course.sale_counter + 1
             course.save()
-            datahistory.save()
             pdf_urls.append(cart.course.course_file.url)
             cart.delete()
+            
         context={
             'pdf_urls':pdf_urls
         }
@@ -216,13 +228,21 @@ def conformation(request):
     
 @login_required(login_url='login/')
 def buyinghistory(request):
-    historiesforbuy = DataHistory.objects.filter(buyer=request.user)
-    historiesforsale = DataHistory.objects.filter(course_id=request.user.id)
+    historiesforbuy = BuyHistory.objects.filter(buyer=request.user)
+    historiesforsale = BuyHistory.objects.filter(course_id=request.user.id)
     context = {
         'historiesforsale':historiesforsale,
         'historiesforbuy':historiesforbuy,
                }
     return render(request, "buyinghistory.html" , context)
+
+@login_required(login_url='login/')
+def sellinghistory(request):
+    historiesforsale = SaleHistory.objects.filter(seller=request.user)
+    context = {
+        'historiesforsale':historiesforsale,
+               }
+    return render(request, "sellinghistory.html" , context)
 
 
 
@@ -237,10 +257,4 @@ def becamesaller(request):
     
     
     
-@login_required(login_url='login/')
-def sellinghistory(request):
-    historiesforsale = DataHistory.objects.filter(course_id=request.user.id)
-    context = {
-        'historiesforsale':historiesforsale,
-               }
-    return render(request, "sellinghistory.html" , context)
+

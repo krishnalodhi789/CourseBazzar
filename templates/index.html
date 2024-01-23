@@ -1,67 +1,233 @@
 {% extends "base.html" %}
-{% load static %}
+ {% load static %}
+{% block style %}
+.hotcourse-badge{
+transform:rotate(-45deg); 
+top:12px; 
+left:-101px; } 
 
+.bestoffercourse-badge{
+  transform:rotate(45deg); 
+  top:15px; 
+  right:-58px;
+}
+.offers-badge{
+  transform:rotate(-45deg); 
+  top:-5px; 
+  left:-52px;
+}
 
+{% endblock style %} 
 {% block body %}
-{% comment %} <section id="hero" class="d-flex align-items-center justify-content-center">
-    <div class="container" data-aos="fade-up">
 
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-xl-6 col-lg-8">
-          <h1>Powerful Digital Solutions With Gp<span>.</span></h1>
-          <h2>We are team of talented digital marketers</h2>
-        </div>
-      </div>
-
-      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-store-line"></i>
-            <h3><a href="">Lorem Ipsum</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="">Dolor Sitema</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="">Sedare Perspiciatis</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-paint-brush-line"></i>
-            <h3><a href="">Magni Dolores</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-database-2-line"></i>
-            <h3><a href="">Nemos Enimade</a></h3>
-          </div>
-        </div>
-      </div>
-
+<!-- Hot Couser ---------------- -->
+<div class="container my-5 px-5">
+  <div
+    class="row justify-content-around border shadow py-5 bg-white position-relative overflow-hidden"
+  >
+    <div
+      class="bg-info px-5 py-3 border position-absolute w-25 text-center hotcourse-badge"
+    >
+      <span class="text-white fw-semibold">Hot Course </span>
     </div>
-  </section><!-- End Hero --> {% endcomment %}
-<div class="container my-5">
-
-  <div class="row justify-content-center">
-    <div class="col-5 d-flex-flex-column">
-      <h1 class="display-4 fw-bold text-info">
-        {{hotcourse.title}}
-      </h1>
-      <p>{{hotcourse.description|truncatechars:150}}</p>
+    <div class="col-6 d-flex-flex-column text-center">
+      <h1 class="display-5 mt-5 fw-bold text-info">{{hotcourse.title}}</h1>
+      <p class="small fw-semibold text-secondary fst-italic mt-4">
+        {{hotcourse.description|truncatechars:150}}
+      </p>
+      <h3 class="text-primary mb-0">
+        <i class="bi bi-currency-dollar"></i>{{hotcourse.price|floatformat:2}}
+      </h3>
+      <p class="fw-semibold text-secondary fst-italic mb-0">
+        {{hotcourse.sale_counter}} Sales
+      </p>
+      <a href="{% url 'addtocart' id=hotcourse.id %}" class="">
+        <button class="btn btn-outline-success fw-semibold px-3 mt-3">
+          <span class="h4">+</span> Add To Cart
+        </button>
+      </a>
     </div>
     <div class="col-5">
-      <img src="{{hotcourse.image.url}}" class="rounded-5" height="300px" width="100%">
+      <img
+        src="{{hotcourse.image.url}}"
+        class="rounded-5"
+        height="300px"
+        width="100%"
+      />
     </div>
   </div>
-  
 </div>
 
-{% endblock body %}
+<!-- Service Info ---------------- -->
+<div class="container-fluid my-5 px-5">
+  <div class="row px-5 justify-content-evenly">
+    <div
+      class="col-2 shadow border py-2 text-center"
+      style="background-color: white !important"
+    >
+      <p class="mb-0 fs-2 text-info">
+        <i class="bi bi-universal-access"></i>
+      </p>
+      <p class="fw-semibold text-secondary fs-6 mb-0">Lifetime Accessibility</p>
+    </div>
+
+    <div
+      class="col-2 shadow border py-2 text-center"
+      style="background-color: white !important"
+    >
+      <p class="mb-0 fs-2 text-info">
+        <i class="bi bi-currency-dollar"></i>
+      </p>
+      <p class="fw-semibold text-secondary fs-6 mb-0">Low Price</p>
+    </div>
+
+    <div
+      class="col-2 shadow border py-2 text-center"
+      style="background-color: white !important"
+    >
+      <p class="mb-0 fs-2 text-info">
+        <i class="bi bi-cart-plus"></i>
+      </p>
+      <p class="fw-semibold text-secondary fs-6 mb-0">Easy To Buy</p>
+    </div>
+
+    <div
+      class="col-2 shadow border py-2 text-center"
+      style="background-color: white !important"
+    >
+      <p class="mb-0 fs-2 text-info">
+        <i class="bi bi-receipt"></i>
+      </p>
+      <p class="fw-semibold text-secondary fs-6 mb-0">Easy To Sale</p>
+    </div>
+  </div>
+</div>
+
+<!-- Best Offer Section ---------------- -->
+<div class="container-fluid my-5 px-5">
+  <div class="row px-5 justify-content-evenly">
+    <div class="col-3  my-auto p-3 border shadow-lg position-relative overflow-hidden" style="height: fit-content;">
+      <div
+      class="bg-info px-5 py-3 border position-absolute w-50 text-center bestoffercourse-badge"
+    >
+      <span class="text-white fw-semibold">Best Offer</span>
+    </div>
+      <h4 class="text-secondary mb-4">Deal of the week..</h4>
+      <img src="{{bestoffercourse.course.image.url}}" class="mb-4" alt="" height="320px" width="100%">
+      <span class="text-secondary small">{{bestoffercourse.saller.email}}</span>
+      <h5 >{{bestoffercourse.course.title}}</h5>
+
+      <div class="d-flex align-items-center">
+        <span class="text-secondary fw-semibold fs-5 text-danger me-2"><i class="bi bi-currency-dollar"></i>{{offerprice}}</span>
+        <span  class="text-secondary fw-semibold small align-middle"><del><i class="bi bi-currency-dollar"></i>{{bestoffercourse.course.price|floatformat:2}}</del></span>
+        <button class="btn btn-info ms-auto text-white fw-semibold" disabled>{{bestoffercourse.offer}}% off</button>
+       </div>
+       <hr>
+       <div class="text-center">
+        <a href="{% url 'addtocart' id=hotcourse.id %}" class="">
+          <button class="btn btn-outline-success px-4 mx-auto fw-semibold "><i class="bi bi-plus-lg"></i> Add TO Cart</button>
+         </a>
+       </div>
+    </div>
+
+    <div class="col-7">
+      <h4>Other Offers ....</h4>
+      <hr>
+      <div class="container-fluid">
+        <div class="row row-cols-3 gx-5">
+          {% for course in courses %}
+          {% if forloop.counter != 1 %}
+          <div class="col d-flex  my-4 {% if  forloop.counter != 4 or  forloop.counter != 7 %}border-end{% endif %} " onmouseenter="showBtn('btn-addtocart{{forloop.counter}}')" onmouseleave="hiddenBtn('btn-addtocart{{forloop.counter}}')">
+            <div class="pt-4 pb-2 px-4 shadow-sm position-relative overflow-hidden" style="height: fit-content; height: fit-content;">
+              <div class="position-absolute offers-badge w-50 py-2 text-center bg-info">
+                <span class="small fw-semibold text-white">{{course.offer}}% </span>
+              </div>
+              <img src="{{course.course.image.url}}" height="150px" width="100%" alt="">
+              <span class="text-secondary small">{{course.saller.email}}</span>
+              <h6 >{{course.course.title}}</h6>
+              <p class="mb-0"> <span class="text-secondary fw-semibold fs-5 text-danger me-2"><i class="bi bi-currency-dollar"></i>{{offerprice}}</span>
+                <span  class="text-secondary fw-semibold small align-middle"><del><i class="bi bi-currency-dollar"></i>{{bestoffercourse.course.price|floatformat:2}}</del></span>
+               </p>
+               <div class="text-center d-none mt-2" id="btn-addtocart{{forloop.counter}}" style="transition:all 1s linear !important"> 
+                <a href="{% url 'addtocart' id=hotcourse.id %}" class="">
+                  <button class="btn btn-outline-success px-4 mx-auto fw-semibold "><i class="bi bi-plus-lg"></i> Add TO Cart</button>
+                 </a>
+               </div>
+            </div>
+            
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% for msg in messages %}
+{{msg.tags}}
+    <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
+      <iframe src="https://www.youtube.com/watch?v=PdkQooqoINA" class="d-none" frameborder="0" onload="message()"></iframe>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="msgButton">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"> 
+            <img src="{{user.image.url}}" class="rounded-5" style="height: 30px; width:30px;">
+            {{user.email}}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{msg}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endblock body %}
+
+  {% block customJS %}
+  <script>
+    function message(){
+        const msgButton = document.getElementById("msgButton")
+        msgButton.click()
+    }
+
+    function showBtn(id){
+        const btn = document.getElementById(id)
+        btn.classList.replace("d-none", "d-block");
+    }
+    function hiddenBtn(id){
+      const btn = document.getElementById(id)
+      btn.classList.replace("d-block", "d-none");
+  }
+  </script>
+
+  {% endblock customJS %}
+

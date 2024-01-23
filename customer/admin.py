@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Course ,AddToCart,Wallet, AmountTransitionHistory, DataHistory, CustomUser
+from .models import Course ,AddToCart,Wallet, AmountTransitionHistory, BuyHistory,SaleHistory, CustomUser,CourseOffer
 
 
 
@@ -52,15 +52,24 @@ class CustomUserAdmin(UserAdmin):
     )
 admin.site.register(CustomUser, CustomUserAdmin)
 
-# admin.site.register(DataHistory)
-@admin.register(DataHistory)
-class CourseAdmin(admin.ModelAdmin):
-    list_display =['buyer','saller','course']
-    
-    def saller(self):
-        return self.course.user
-  
+# admin.site.register(BuyHistory)
+@admin.register(BuyHistory)
+class BuyHistoryAdmin(admin.ModelAdmin):
+    list_display =['buyer','course_id']
 
+@admin.register(SaleHistory)
+class SaleHistoryeAdmin(admin.ModelAdmin):
+    list_display =['seller','course_id']
+
+
+  
+@admin.register(CourseOffer)
+class CourseAdmin(admin.ModelAdmin):
+    list_display =['saller',"course","get_offer"]
+    
+    def get_offer(self,instance)->str:
+        return f"{instance.offer}%"
+  
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):

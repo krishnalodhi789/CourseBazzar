@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import resolve
-from customer.models import Course, CustomUser
+from customer.models import Course, CustomUser, CourseOffer
 
 def home(request):
     courses = Course.objects.all()
@@ -8,12 +8,21 @@ def home(request):
     for course in courses:
         if max_sale<course.sale_counter:
             max_sale=course.sale_counter
-            
     hotcourse = Course.objects.get(sale_counter=max_sale)
     
+    offers = CourseOffer.objects.all().order_by('-offer')[:6]
+    bestoffer = 0
+    for course in offers:
+        if bestoffer<course.offer:
+            bestoffer=course.offer
+    bestoffercourse = CourseOffer.objects.get(offer=bestoffer)
+    offerprice = bestoffercourse.course.price-bestoffercourse.course.price/100*bestoffercourse.offer
     
     context={
         'hotcourse':hotcourse,
+        'bestoffercourse':bestoffercourse,
+        'offerprice':offerprice,
+        'courses':offers,
         "home":True
     }         
     print(hotcourse)
@@ -40,8 +49,10 @@ def aboutmorecourse(request, id):
 def publishercourses(request, id):    
     backurl = request.META.get('HTTP_REFERER')
     course = Course.objects.get(id=id)
-    customer = CustomUser.objects.get(id=course.user_id)
-    usercourses = Course.objects.filter(user_id =customer.id)
+    user = CustomUser.objects.get(id=course.user_id)
+    usercourses = user.courses.all()
+    print("=================================================")
+    print(usercourses)
     context={
         'backurl':backurl,
         'course':course,

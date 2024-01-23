@@ -13,7 +13,7 @@
           <h1 class="display-4 text-center fw-bold text-secondary"> <i class="bi bi-clock-history me2"></i> Your History...</h1>
           <hr />
         </div>
-        {% if not historiesforbuy %}
+        {% if not historiesforsale %}
         <div class="row">
           <div
             class="col-6 mx-auto text-center text-danger d-flex flex-column justify-content-center"
@@ -49,14 +49,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for history in historiesforbuy %}
+                {% for history in historiesforsale %}
                 <tr class="fs-5">
                     <th>{{forloop.counter}}</th>
-                    <td><a href="{% url 'About More Course' id=history.course.id %}">{{history.course.title}}</a></td>
-                    <td>{{history.course.user.email}}</td>
-                    <td>{{history.datatime}}</td>
+                    <td>{{history.course.title}}</td>
+                    <td>{{history.course.salehisto}}</td>
+                    <td>{{history.datetime}}</td>
                     <td>
-                      <a href="{{history.course.course_file.url}}" download=".pdf">
+                      <a href="{{history.course.course_file.url}}">
                         <button class="btn btn-outline-secondary"><i class="bi bi-file-earmark-pdf"></i> download PDF</button>
                     </a></td>
                 </tr>

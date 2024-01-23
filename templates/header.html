@@ -75,7 +75,7 @@
             <a href="{% url 'customerprofile' %}" class="text-decoration-none">
               <button class="btn btn-outline-secondary">
                 <img src="{{customer.image.url}}" alt="" style="width: 25px; height:22px" class="rounded-circle">
-                {{user.email|truncatechars:8}}
+                {{user.email|truncatechars:8}} <i class="bi bi-caret-down-fill"></i>
               </button>
             </a>
           </div>
