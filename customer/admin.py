@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Course ,AddToCart,Wallet, AmountTransitionHistory, BuyHistory,SaleHistory, CustomUser,CourseOffer
+from .models import Course ,AddToCart,Wallet, AmountTransitionHistory, BuyHistory,SaleHistory, CustomUser,CourseOffer,CourseCategory
 
 
 
@@ -61,7 +61,10 @@ class BuyHistoryAdmin(admin.ModelAdmin):
 class SaleHistoryeAdmin(admin.ModelAdmin):
     list_display =['seller','course_id']
 
-
+@admin.register(CourseCategory)
+class CourseAdmin(admin.ModelAdmin):
+    list_display =['category_name']
+    
   
 @admin.register(CourseOffer)
 class CourseAdmin(admin.ModelAdmin):
@@ -73,8 +76,10 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display =['user','id','user_id','approve','title',"course_file"]
+    list_display =['user','approve',"get_category_name",'title',"course_file"]
     
+    def get_category_name(self,instance)->str:
+        return f"{instance.category_name.category_name}"
 
 @admin.register(AddToCart)
 class AddToCartAdmin(admin.ModelAdmin):

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import resolve
-from customer.models import Course, CustomUser, CourseOffer
+from customer.models import Course, CustomUser, CourseOffer,CourseCategory
 
 def home(request):
     courses = Course.objects.all()
@@ -16,13 +16,16 @@ def home(request):
         if bestoffer<course.offer:
             bestoffer=course.offer
     bestoffercourse = CourseOffer.objects.get(offer=bestoffer)
-    offerprice = bestoffercourse.course.price-bestoffercourse.course.price/100*bestoffercourse.offer
     
+    bestsellerscourses = Course.objects.all().order_by('-sale_counter')[:6]
+
+    categories = CourseCategory.objects.all()
     context={
         'hotcourse':hotcourse,
         'bestoffercourse':bestoffercourse,
-        'offerprice':offerprice,
         'courses':offers,
+        'bestsellerscourses':bestsellerscourses,
+        'categories':categories,
         "home":True
     }         
     print(hotcourse)
@@ -67,3 +70,15 @@ def contact(request):
         'contact':True
     }
     return render(request, 'contactpage.html', context)
+
+
+def super_deals(request):
+    bestoffercourses = CourseOffer.objects.all().order_by("-offer")[:3]
+    otheroffercourses = CourseOffer.objects.all().order_by("-offer")[3:]
+    print(bestoffercourses)
+    context={
+        'bestoffercourses':bestoffercourses,
+        "superdealspage":True,
+        'otheroffercourses':otheroffercourses
+    }
+    return render(request, 'superdeals.html', context)

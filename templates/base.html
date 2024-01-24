@@ -35,6 +35,10 @@
         outline: none;
         color: gray;
       }
+      .msgfield{
+        outline: none;
+        color: gray;s
+      }
 
       {% block style %}
       {% endblock style %}
@@ -47,13 +51,15 @@
 
       {% comment %} Hearder start ---------------- {% endcomment %}
       {% if home %}
-      {% include "header.html" with  home="text-info border-bottom border-info" %}
+        {% include "header.html" with  home="text-info border-bottom border-info" %}
       {% elif buycourse %}
-      {% include "header.html" with  buycourse="text-info border-bottom border-info" %}
+        {% include "header.html" with  buycourse="text-info border-bottom border-info" %}
       {% elif contact %}
-      {% include "header.html" with  contact="text-info border-bottom border-info" %}
+        {% include "header.html" with  contact="text-info border-bottom border-info" %}
+      {% elif superdealspage %}
+        {% include "header.html" with  superdealspage="text-info border-bottom border-info" %}
       {% else %}
-      {% include "header.html" %}
+        {% include "header.html" %}
       {% endif %}
       {% comment %} Hearder End ---------------- {% endcomment %}
       

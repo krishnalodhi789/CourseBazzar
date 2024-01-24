@@ -19,4 +19,9 @@ urlpatterns = [
         contact,
         name="contact",
     ),
+    path(
+        "super deals/",
+        super_deals,
+        name="super_deals",
+    ),
 ]

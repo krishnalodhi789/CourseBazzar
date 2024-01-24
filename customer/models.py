@@ -11,10 +11,17 @@ class CustomUser(AbstractUser):
     gender =  models.CharField(max_length=32,choices=(('male',"Male"),("female", "Female"),("other", "Other")))
     image = models.ImageField(upload_to='Profile/', default='Profile/pic.png')
 
-   
+class CourseCategory(models.Model):
+    category_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.category_name
+    
 class Course(models.Model):
     user =  models.ForeignKey(CustomUser, related_name='courses', on_delete=models.CASCADE)
+    category = models.ForeignKey(CourseCategory,  on_delete=models.CASCADE)
     title =  models.CharField(max_length=50)
+    key_points = models.CharField(max_length=100,blank=True, null=True)
     description = models.TextField(max_length=5000)
     price = models.IntegerField()
     sale_counter = models.IntegerField(default=0)
@@ -59,3 +66,4 @@ class CourseOffer(models.Model):
     saller = models.ForeignKey(CustomUser,related_name='courseoffer', on_delete=models.CASCADE)
     course = models.OneToOneField(Course, on_delete=models.CASCADE)
     offer = models.IntegerField(default=0) 
+    remaining_amount = models.FloatField(default=0.0)
