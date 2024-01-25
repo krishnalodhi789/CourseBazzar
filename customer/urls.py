@@ -43,6 +43,9 @@ urlpatterns = [
     path(
         "deshboard/selling history/", sellinghistory, name="sellinghistory"
     ),
+    path(
+        "deshboard/selling history/course/", singlecourse, name="singlecourse"
+    ),
     
     path(
         "became saller/", becamesaller, name="becamesaller"

@@ -43,29 +43,33 @@
                 <tr>
                     <th>S.No.</th>
                 <th>Course Name</th>
-                <th>Publish Name</th>
+                <th>buyer Name</th>
                 <th>Data & Time</th>
-                <th>Course PDF</th>
+                <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
                 {% for history in historiesforsale %}
-                <tr class="fs-5">
+                <tr class="fs-6">
                     <th>{{forloop.counter}}</th>
-                    <td>{{history.course.title}}</td>
-                    <td>{{history.course.salehisto}}</td>
-                    <td>{{history.datetime}}</td>
                     <td>
-                      <a href="{{history.course.course_file.url}}">
-                        <button class="btn btn-outline-secondary"><i class="bi bi-file-earmark-pdf"></i> download PDF</button>
-                    </a></td>
+                      <form action="{% url 'singlecourse' %}" method="get">
+                        <input type="text" name="course_name" value="{{history.course.title}}" class="d-none">
+                        <button class="border-0 bg-body text-primary text-decoration-underline">{{history.course.title}}</button>
+                      </form>
+                    </td>
+                    <td>{{history.buyer.first_name}} {{history.buyer.last_name}}</td>
+                    <td>{{history.datetime}}</td>
+                    <td class="text-success fw-semibold">
+                      <i class="bi bi-currency-dollar"></i>
+                      {{history.course.price|floatformat:2}}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
           </table>
 
         </div>
-        <hr>
         
 
         {% endif %}

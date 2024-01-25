@@ -32,10 +32,19 @@ def home(request):
     return render(request, 'index.html',context)
 
 def buycourse(request):
-    courses= Course.objects.all().order_by("-id")
+    category_name = request.GET.get("category_name")
+    if category_name is not None:
+        courses= Course.objects.filter(category=category_name)
+        
+    else:
+        courses= Course.objects.all().order_by("-id")
+    selected_category =category_name
+    categories = CourseCategory.objects.all()
     context={
         "buycourse":True,
-        "courses":courses
+        "courses":courses,
+        "categories":categories,
+        "selected_category":selected_category,
     }
     return render(request, 'buycourse.html',context)
 

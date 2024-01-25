@@ -90,8 +90,8 @@ left:-52px;
 </div>
 
 <!-- Best Offer Section ---------------- -->
-<div class="container-fluid my-5 px-5">
-  <div class="row px-5 justify-content-evenly">
+<div class="container-fluid my-5 py-5">
+  <div class="row px-5 justify-content-evenly mt-5">
     <div class="col-3  my-auto p-3 border shadow-lg position-relative overflow-hidden" style="height: fit-content;">
       <div class="bg-info px-5 py-3 border position-absolute w-50 text-center bestoffercourse-badge">
         <span class="text-white fw-semibold">Best Offer</span>
@@ -124,19 +124,11 @@ left:-52px;
       </div>
 
       <div class="col-8 ms-auto d-flex border"id="showcategories">
-        <div class="dropdown ms-auto  ">
-          <button class="border-0 bg-body fw-semibold dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Filter
+        <a href="">
+          <button class="btn btn-outline-info fw-semibold">
+            Get More
           </button>
-          <ul class="dropdown-menu p-3">
-           {% for i in categories %}
-            <li>
-              <input type="checkbox" id="category{{forloop.counter}}" value="{{i.category_name}}" onchange="selectcategory(event)">
-             <label for="category{{forloop.counter}}">{{i.category_name}}</label> 
-              
-          </li>
-           {% endfor %}
-          </ul>
+        </a>
         </div>
       </div>
        <hr class="mt-0">
@@ -148,13 +140,13 @@ left:-52px;
           <div class="col d-flex {{forloop.counter}} my-4 {% if forloop.counter != 4 %}border-end{% endif %} {% if forloop.counter != 7 %}border-end{% endif %}"
           onmouseenter="showBtn('btn-addtocart{{forloop.counter}}')"
           onmouseleave="hiddenBtn('btn-addtocart{{forloop.counter}}')"
-          style="height: 260px;">
+          style="height: 220px;">
             <div class="pt-4 pb-2 px-4 shadow-sm position-relative overflow-hidden"
               style="height: fit-content; height: fit-content;">
               <div class="position-absolute offers-badge w-50 py-2 text-center bg-info">
                 <span class="small fw-semibold text-white">{{offercourse.offer}}% </span>
               </div>
-              <img src="{{offercourse.course.image.url}}" height="150px" width="100%" alt="">
+              <img src="{{offercourse.course.image.url}}" height="120px" width="100%" alt="">
               <span class="text-secondary small">{{offercourse.course.category.category_name}}</span>
               <h6>{{offercourse.course.title}}</h6>
               <p class="mb-0"> <span class="text-secondary fw-semibold fs-5 text-danger me-2 align-middle"><i

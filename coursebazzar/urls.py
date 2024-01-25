@@ -41,7 +41,7 @@ urlpatterns = [
     
     
     # Customer app URLs -------------------------------------------
-    path("customer/", include("customer.urls"))
+    path("user/", include("customer.urls"))
     # path("signup/", customer_view.signupform, name="signup"),
     # path("login/", customer_view.customerlogin, name="login"),
     # path("logout/", customer_view.customerlogout, name="customerlogout"),

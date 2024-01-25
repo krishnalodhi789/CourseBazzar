@@ -1,27 +1,59 @@
-{% extends "base.html" %} {% load static %} 
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block style %}
+ select {
+      appearance: none; /* Remove default appearance */
+      -webkit-appearance: none; /* For older versions of Chrome/Safari */
+      -moz-appearance: none; /* For older versions of Firefox */
+      text-indent: 1px; /* Fix for Firefox */
+      text-overflow: ''; /* Fix for Firefox */
+    }
+select:focus{
+  outline:none;
+}
+.filterfield:focus{
+  outline:none;  
+}
+.filterbtn:active{
+  background-color: #e0f0cc !important;
+}
+.category_hover:hover{
+  cursor:pointer;
+  background-color:#edf0f5 !important;
+}
+
+.selectbox_show{
+  height: fit-content !important
+}
+.selectbox_hidden{
+  height: 0px !important
+}
+{% endblock style %}
 
 
 
 {% block body %}
 
 <div class="container-fluid overflow-hidden mb-5 pb-5 px-5">
-    <div class="row mt-4">
+    <div class="row mt-4 align-items-center">
         <div class="col-4">
           <h1 class="display-6 fw-semibold">Latest Uploaded Course ..</h1>
         </div>
-        <div class="col-4 ms-auto d-flex">
-          <div class="dropdown ms-auto my-auto">
-            <button class="border-0 bg-body fw-semibold px-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-             Filter
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
+        <div class="col-4 ms-auto d-flex border h-100  bg-white p-0 overflow-hid position-relative">
+            <input type="text" class="fw-normal text-secondary border-0  px-2 py-2 w-75 filterfield" name="" placeholder="{% if selected_category %} {{selected_category}} {% else %}Select Category {% endif %}" id="" oninput="showOptions(event)" onblur="hiddenOpitions(event)">
+            
+            <div class="vr"></div>
+          <button class="border-0  ms-auto fw-normal text-secondary p-0 filterbtn" style='width: 25%; background-color: #d5f0b1;'> Filter <i class="bi bi-filter">
+            
+          </i></button>
+          <div class="w-100 border position-absolute overflow-hidden selectbox_hidden" id="selectbox" style="top: 40px; background-color: #fff !important; ">
+            {% for i in categories %}
+                 <p class="fw-semibold text-secondary category_hover mb-0 py-2 ps-3" onclick="selectedCategory()">{{i.category_name}}</p>
+                {% endfor %}
           </div>
         </div>
-        <hr class="mt-0"/>
+        <hr class="mt-2"/>
     </div>
     <div class="row pt-5 gy-5 gx-5">
         <!--     
@@ -32,31 +64,27 @@
          {% if course.approve %}
           {% if not course.user == user %}
           <div class="col-6">
-              <div
-                  class="shadow-lg d-flex justify-content-center rounded px-1 py-3 h-100"
-              >
+              <div class="shadow-lg d-flex justify-content-center rounded px-1 py-3 h-100">
                   <div style="width: 35%">
-                  <img src="{{course.image.url}}" height="220px" width="100%" alt="" />
+                    <img src="{{course.image.url}}" height="100%" width="100%" alt="" />
                   </div>
 
                   <div style="width: 40%" class="d-flex">
-                  <div class="px-2">
-                      <img
-                      src="{{course.user.image.url}}"
-                      alt=""
-                      style="width: 30px; height: 30px"
-                      class="rounded-circle"
-                      />
-                      {{course.user.email}}
+                  <div class="px-2 d-flex flex-column">
+                     
+                     <p class="fw-semibold fst-italic mb-0 text-secondary">
+                        {{course.category.category_name}}
+                     </p>
                       <h4>{{course.title}}</h4>
-                      <p class="fw-normal" style="font-size: 13px">
+                      <p  class="text-secondary fst-italic" style="font-size: 13px;font-weight: 600;">
                       {{course.description|truncatechars:200 }}
                       </p>
 
-                      <a href="{% url 'About More Course' id=course.id %}"
-                      ><button class="btn btn-secondary px-3">
-                          About More <i class="bi bi-box-arrow-up-right ms-1"></i></button
-                      ></a>
+                      <a href="{% url 'About More Course' id=course.id %}" class=' mt-auto'>
+                        <button class="btn btn-secondary px-3">
+                          About More <i class="bi bi-box-arrow-up-right ms-1"></i>
+                        </button>
+                      </a>
                   </div>
                   <div class="vr"></div>
                   </div>
@@ -138,6 +166,24 @@
         const msgButton = document.getElementById("msgButton")
         msgButton.click()
     }
+
+    function showOptions(event){
+      const selectbox =  document.getElementById("selectbox")
+      selectbox.classList.replace("selectbox_hidden","selectbox_show")
+       
+
+    }
+       function hiddenOpitions(event){
+      const selectbox =  document.getElementById("selectbox")
+      selectbox.classList.replace("selectbox_show","selectbox_hidden")
+       
+
+    }
+
+    function selectedCategory(){
+      alert("name")
+    }
+    
   </script>
 
   {% endblock customJS %}

@@ -51,17 +51,13 @@ class AmountTransitionHistory(models.Model):
     datetime = models.DateTimeField(default=datetime.datetime.now())
 
 
-class BuyHistory(models.Model):
+class CourseHistory(models.Model):
     buyer = models.ForeignKey(CustomUser,related_name='buyhistories', on_delete=models.CASCADE)
     course = models.ForeignKey(Course,related_name='coursebuyhistories', on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=datetime.datetime.now()) 
-
-class SaleHistory(models.Model):
     seller = models.ForeignKey(CustomUser,related_name='salehistories', on_delete=models.CASCADE)
-    course = models.ForeignKey(Course,related_name='coursesalehistories', on_delete=models.CASCADE)
-    datetime = models.DateTimeField(default=datetime.datetime.now()) 
-        
-    
+
+
 class CourseOffer(models.Model):
     saller = models.ForeignKey(CustomUser,related_name='courseoffer', on_delete=models.CASCADE)
     course = models.OneToOneField(Course, on_delete=models.CASCADE)

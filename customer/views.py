@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import  Course, AddToCart, AmountTransitionHistory,SaleHistory, BuyHistory, CustomUser, Wallet
+from .models import  Course, AddToCart, AmountTransitionHistory, CourseHistory, CustomUser, Wallet
 
 
 def signupform(request):
@@ -163,8 +163,8 @@ def wallet(request):
     
 
     transitions=request.user.amounttransitionhistory.all()
-    salehistory =SaleHistory.objects.filter(seller=request.user)
-    buyhistory =BuyHistory.objects.filter(buyer=request.user)
+    salehistory =CourseHistory.objects.filter(seller=request.user)
+    buyhistory =CourseHistory.objects.filter(buyer=request.user)
 
     context={
         'transitions':transitions,
@@ -208,14 +208,12 @@ def conformation(request):
             saller_wallet.save()
             superadmin.save()
             course = cart.course
-            buyhistory = BuyHistory.objects.create(
+            buyhistory = CourseHistory.objects.create(
                 buyer=request.user,
-                course = course
+                course = course,
+                seller=seller
             )
-            salehistory = SaleHistory.objects.create(
-                seller=seller,
-                course = course
-            )
+           
             course.sale_counter = course.sale_counter + 1
             course.save()
             pdf_urls.append(cart.course.course_file.url)
@@ -228,17 +226,15 @@ def conformation(request):
     
 @login_required(login_url='login/')
 def buyinghistory(request):
-    historiesforbuy = BuyHistory.objects.filter(buyer=request.user)
-    historiesforsale = BuyHistory.objects.filter(course_id=request.user.id)
+    historiesforbuy = CourseHistory.objects.filter(buyer=request.user)
     context = {
-        'historiesforsale':historiesforsale,
         'historiesforbuy':historiesforbuy,
                }
     return render(request, "buyinghistory.html" , context)
 
 @login_required(login_url='login/')
 def sellinghistory(request):
-    historiesforsale = SaleHistory.objects.filter(seller=request.user)
+    historiesforsale = CourseHistory.objects.filter(seller=request.user)
     context = {
         'historiesforsale':historiesforsale,
                }
@@ -253,6 +249,18 @@ def becamesaller(request):
     user.save()
     messages.info(request, "You are now a Saller..")
     return redirect("addcourse")
+    
+    
+    
+
+@login_required(login_url='login/')
+def singlecourse(request):
+    if request.method == "GET":
+        course_name= request.GET.get('course_name')
+        course = Course.objects.get(title=course_name)
+        print(course.title)
+        context = {'course': course}
+        return render(request, "singlecoursepage.html", context)
     
     
     

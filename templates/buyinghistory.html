@@ -43,7 +43,7 @@
                 <tr>
                     <th>S.No.</th>
                 <th>Course Name</th>
-                <th>Publish Name</th>
+                <th>Seller Name</th>
                 <th>Data & Time</th>
                 <th>Price</th>
                 <th>Course PDF</th>
@@ -54,12 +54,12 @@
                 <tr>
                     <th>{{forloop.counter}}</th>
                     <td><a href="{% url 'About More Course' id=history.course.id %}">{{history.course.title}}</a></td>
-                    <td>{{history.course.user.email}}</td>
+                    <td>{{history.seller.first_name}} {{history.seller.last_name}}</td>
                     <td>{{history.datetime}}</td>
                     <td class="fw-semibold">$ {{history.course.price|floatformat:2}}</td>
                     <td>
-                      <a href="{{history.course.course_file.url}}" download=".pdf">
-                        <button class="btn btn-outline-secondary"><i class="bi bi-file-earmark-pdf"></i> download PDF</button>
+                      <a href="{{history.course.course_file.url}}">
+                        <button class="btn btn-outline-secondary"><i class="bi bi-file-earmark-pdf"></i> {{history.course.title}} </button>
                     </a></td>
                 </tr>
                 {% endfor %}
