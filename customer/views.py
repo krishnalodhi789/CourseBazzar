@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import  Course, AddToCart, AmountTransitionHistory, CourseHistory, CustomUser, Wallet
+from .models import  Course, CourseCategory, AddToCart, AmountTransitionHistory, CourseHistory, CustomUser, Wallet
 
 
 def signupform(request):
@@ -71,10 +71,12 @@ def addcourse(request):
         description = request.POST.get('description')
         pdf = request.FILES.get('course_file')
         image =request.FILES.get('image')
+        category_id =request.POST.get('category_id')
         
         customer = CustomUser.objects.get(id=request.user.id)
         course = Course.objects.create(
             user = customer,
+            category=CourseCategory.objects.get(id=category_id),
             title =title,
             description = description,
             price = price,
@@ -83,7 +85,10 @@ def addcourse(request):
         )
         course.save()
         return redirect('uploadedcourses')
-    return render(request, 'addcourse.html')
+    context={
+        "categories":CourseCategory.objects.all()
+    }
+    return render(request, 'addcourse.html',context)
 
 @login_required(login_url='login')
 def uploadedcourses(request):
