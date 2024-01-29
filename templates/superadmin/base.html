@@ -31,35 +31,30 @@
 
     {% comment %} Internal JS Start ---------------- {% endcomment %}
     <style>
-      .searchfield:focus{
-        outline: none;
-        color: gray;
+      .active_page{
+        color: skyblue !important;
+        border-color:skyblue !important;
       }
-      .msgfield{
-        outline: none;
-        color: gray;s
-      }
-
       {% block style %}
       {% endblock style %}
     </style>
     {% comment %} Internal CSS End ---------------- {% endcomment %}
     
      
-    </head> 
+    </head>
     <body >
 
       {% comment %} Hearder start ---------------- {% endcomment %}
       {% if home %}
-        {% include "header.html" with  home="text-info border-bottom border-info" %}
-      {% elif buycourse %}
-        {% include "header.html" with  buycourse="text-info border-bottom border-info" %}
-      {% elif contact %}
-        {% include "header.html" with  contact="text-info border-bottom border-info" %}
-      {% elif superdealspage %}
-        {% include "header.html" with  superdealspage="text-info border-bottom border-info" %}
-      {% else %}
-        {% include "header.html" %}
+        {% include "superadmin/header.html"  with  home="text-info border-bottom border-info" %}
+      {% elif approvedcourse %}
+          {% include "superadmin/header.html"  with  approvedcourse="text-info border-bottom border-info" %}
+          {% elif not_approvedcourse %}
+          {% include "superadmin/header.html"  with  not_approvedcourse="text-info border-bottom border-info" %}
+      
+          {% else %}
+      
+      {% include "superadmin/header.html" %}
       {% endif %}
       {% comment %} Hearder End ---------------- {% endcomment %}
       
@@ -70,11 +65,6 @@
       {% comment %} Body section end ---------------- {% endcomment %}
       
       
-      {% comment %} Footer start ---------------- {% endcomment %}
-      {% include "footer.html" %}
-      {% comment %} Footer End ---------------- {% endcomment %}
-      
-
       {% comment %} Internal JS Start ---------------- {% endcomment %}
       {% block customJS %}{% endblock customJS %}
       {% comment %} Internal JS End ---------------- {% endcomment %}

@@ -1,0 +1,74 @@
+{% extends "superadmin/base.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid px-4 px-sm-2 m-0">
+    <div class="row px-5 px-sm-2 m-0">
+        <div class="col-12 py-3 px-2 ">
+            <div class="row py-3 m-0">
+                <div class="col-4">
+                    <h3>Courses Selling History </h3>
+                </div>
+                <div class="col-2 ms-auto d-flex">
+                   <h5 class="ms-auto"> <span class="text-secondary">Total :</span> {{total_history}}</h5>
+                </div>
+                <hr>
+            </div>
+           <div class="container-fluid">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">S. No.</th>
+                        <th scope="col">Course Title</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Publisher</th>
+                        <th scope="col">Buyer</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Date & Time</th>
+                        <th scope="col">PDF File</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in history_list %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>
+                            <a href="">{{i.course.title}}</a>
+                        </td>
+                        <td>
+                            {{i.course.category.category_name}}
+                        </td>
+                        <td>
+                            <a href="">{{i.seller.first_name}} {{i.seller.last_name}}</a>
+                        </td>
+                        <td>
+                            <a href="">{{i.buyer.first_name}} {{i.buyer.last_name}}</a>
+                        </td>
+                        <td class="text-secondary fw-semibold">
+                            <i class="bi bi-currency-dollar"></i>
+                            {{i.course.price|floatformat:2}}
+                        </td>
+                        <td class="fw-semibold">
+                            {{i.datetime}}
+                        </td>
+                        
+                        
+                        <td>
+                            <button class="btn btn-outline-secondary">
+                                <a href="{{i.course.course_file.url}}" class="text-decoration-none text-secondary">
+                                    <i class="bi bi-file-earmark-pdf"></i> PDF
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                    </tbody>
+                </table>
+            </div>    
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+

@@ -1,0 +1,77 @@
+{% load static %}
+
+{% comment %} first Header ------- {% endcomment %}
+<div class="container-fluid px-5 border-bottom shadow">
+  <div class="row px-3 py-2">
+    <div class="col-3 pt-3 d-flex text-center">
+      <span>
+        <img src="{% static 'images/cb-logo.png' %}" width="40px" height="40px" alt="" srcset="">
+      </span>
+      <span class="h-100 position-relative">
+        <p class="mb-0  pb-0 fw-bold position-absolute" style="top:-10px; font-size:23px">Course</p>
+        <p class="mb-0  pb-0 fw-bold position-absolute" style="top:12px; left:15px; font-size:23px">Bazzar</p>
+      </span>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="col-3 mx-auto">
+      <p class="display-4 fw-semibold text-center text-secondary fst-italic">{{user.username}}</p>
+      <hr class="border border-primary border-2 rounded-2 opacity-75">
+    </div>
+    {% endif %}
+    <div class="col-3 ms-auto d-flex">
+      <a href="" class=" ms-auto">
+        <button class=" btn">
+          <div class="mx-3 d-flex  align-items-center">
+            <div>
+              <i class="bi bi-suit-heart fs-1 text-secondary align-center"></i>
+            </div>
+            <div class="ps-2">
+              <p class="mb-0 fw-semibold text-dark ">
+                Wishlist
+              </p>
+              <p class="mb-0 fw-semibold text-secondary">
+                112
+              </p>
+            </div>
+          </div>
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+{% if user.is_authenticated %}
+
+<nav class="navbar navbar-expand-lg  bg-white shadow-lg px-4 py-1 mb-3">
+  <div class="container-fluid">
+    <button class="navbar-toggler fw-semibold" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      Menu
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-start mx-md-start mx-lg-auto  mb-2 mb-lg-0">
+        <li class="nav-item mx-3">
+          <a class="nav-link mx-2 fw-semibold {{home}}" aria-current="page" href="{% url 'superadmin_index' %}"><i
+              class="bi bi-house-fill"></i> Home</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link mx-2 fw-semibold {{approvedcourse}}" aria-current="page" href="{% url 'superadmin_approved_course_list' %}">Approved Courses</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link mx-2 fw-semibold {{not_approvedcourse}}" aria-current="page" href="{% url 'superadmin_not_approved_course_list' %}"> Not Approved Course</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link mx-2 fw-semibold " aria-current="page" href="{% url 'Buy Course' %}">About Us</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link mx-2 fw-semibold {{contact}}" aria-current="page" href="{% url 'contact' %}"><i
+              class="bi bi-person-rolodex"></i> Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endif %}
