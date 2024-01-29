@@ -1,0 +1,66 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course Bazzar</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous">
+
+    {% comment %} Custom CSS ..... {% endcomment %}
+    <link href="{% static 'css\style.css' %}" rel="stylesheet">
+
+    {% comment %} Bootstrap Icons Link ----------------------------------------
+    {% endcomment %}
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {% comment %} Google Font {% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Pacifico&display=swap"
+      rel="stylesheet">
+
+    {% comment %} Internal JS Start ---------------- {% endcomment %}
+    <style>
+      .active_page{
+        color: skyblue !important;
+        border-color:skyblue !important;
+      }
+      {% block style %}
+      {% endblock style %}
+    </style>
+    {% comment %} Internal CSS End ---------------- {% endcomment %}
+    
+     
+    </head>
+    <body >
+
+      {% comment %} Hearder start ---------------- {% endcomment %}
+      
+        {% include "superadmin/header.html" %}
+      {% comment %} Hearder End ---------------- {% endcomment %}
+      
+
+      {% comment %} Body section start ---------------- {% endcomment %}
+      {% block body %}
+      {% endblock body %}
+      {% comment %} Body section end ---------------- {% endcomment %}
+      
+      
+      {% comment %} Internal JS Start ---------------- {% endcomment %}
+      {% block customJS %}{% endblock customJS %}
+      {% comment %} Internal JS End ---------------- {% endcomment %}
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      
+  </body>
+</html>

@@ -1,0 +1,82 @@
+{% extends "superadmin/base.html" %}
+{% load static %}
+
+{% block style %}
+#box_hover:hover{
+	outline:1px #cbd1cc solid !important;
+	cursor:pointer;
+}
+{% endblock style %}
+
+{% block body %}
+<div class="container-fluid px-5 my-5">
+    <div class="row  mx-0 gy-3">
+       <div class="col-3 p-3">
+       	<a href="{% url 'superadmin_approved_course_list' %}" class="text-decoration-none">
+       		<div class="p-2 shadow-lg " id='box_hover'>
+       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+       		<p class="fs-5 fw-semibold text-secondary text-center">
+       			Approved Course
+       		</p>
+       	</div>
+       	</a>
+       </div>
+       <div class="col-3 p-3">
+       	<a href="{% url 'superadmin_not_approved_course_list' %}" class="text-decoration-none">
+       		<div class="p-2 shadow-lg " id='box_hover'>
+       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+       		<p class="fs-5 fw-semibold text-secondary text-center">
+       			Approved Course
+       		</p>
+       	</div>
+       	</a>
+       </div>
+
+       <div class="col-3 p-3">
+       	<div class="p-2 shadow-lg " id='box_hover'>
+       		<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+       		<p class="fs-5 fw-semibold text-secondary text-center">
+       			Not Approved Course
+       		</p>
+       	</div>
+       </div>
+
+       <div class="col-3 p-3">
+       	<div class="p-2 shadow-lg " id='box_hover'>
+       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+       		<p class="fs-5 fw-semibold text-secondary text-center">
+       			Approved Course
+       		</p>
+       	</div>
+       </div>
+
+       <div class="col-3 p-3">
+       	<div class="p-2 shadow-lg " id='box_hover'>
+       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+       		<p class="fs-5 fw-semibold text-secondary text-center">
+       			Approved Course
+       		</p>
+       	</div>
+       </div>
+
+       <div class="col-3 p-3">
+       	<div class="p-2 shadow-lg " id='box_hover'>
+       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+       		<p class="fs-5 fw-semibold text-secondary text-center">
+       			Approved Course
+       		</p>
+       	</div>
+       </div>
+
+       <div class="col-3 p-3">
+       	<div class="p-2 shadow-lg " id='box_hover'>
+       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+       		<p class="fs-5 fw-semibold text-secondary text-center">
+       			Approved Course
+       		</p>
+       	</div>
+       </div>
+    </div>
+</div>
+
+{% endblock body %}
