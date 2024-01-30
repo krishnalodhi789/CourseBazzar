@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from myapp import views as myapp_view
 from customer import views as customer_view
-
+from customer.api import urls as api_urls
 urlpatterns = [
     path("admin/", admin.site.urls),
     
@@ -32,7 +32,10 @@ urlpatterns = [
 
     
     # Customer app URLs -------------------------------------------
-    path("user/", include("customer.urls"))
+    path("user/", include("customer.urls")),
+
+    path("api/", include(api_urls)),
+
 
 ]
 

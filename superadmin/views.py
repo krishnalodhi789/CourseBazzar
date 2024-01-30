@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from customer.models import Course, CourseOffer, CourseHistory, Wallet, AmountTransitionHistory
+from .decorators import check_superadmin_decorator
 import datetime
 
 
@@ -27,11 +28,14 @@ def loginform(request):
 
 	return render(request,"superadmin/login.html")
 
+
+@login_required(login_url='superadmin_loginform')
 def logoutform(request):
 	logout(request)
 	return redirect('superadmin_loginform')
 
 @login_required(login_url='superadmin_loginform')
+@check_superadmin_decorator
 def index(request):
 	total_approved_courses = Course.objects.filter(approve=True).count()
 	total_not_approved_courses = Course.objects.filter(approve=False).count()
@@ -48,6 +52,7 @@ def index(request):
 
 
 @login_required(login_url='superadmin_loginform')
+@check_superadmin_decorator
 def approved_course_list(request):
 	courselist = Course.objects.filter(approve=True).order_by('-approval_datetime')
 	total_course=courselist.count()
@@ -59,6 +64,7 @@ def approved_course_list(request):
 	return render(request,"superadmin/approved_course_list.html", context)
 
 @login_required(login_url='superadmin_loginform')
+@check_superadmin_decorator
 def not_approved_course_list(request):
 	courselist = Course.objects.filter(approve=False).order_by("-published_datetime")
 	total_course=courselist.count()
@@ -70,6 +76,7 @@ def not_approved_course_list(request):
 	return render(request,"superadmin/not_approved_course_list.html", context)
 
 @login_required(login_url='superadmin_loginform')
+@check_superadmin_decorator
 def approved(request, id):
 	course = Course.objects.get(id=id)
 	course.approve=True
@@ -79,6 +86,7 @@ def approved(request, id):
 
 
 @login_required(login_url='superadmin_loginform')
+@check_superadmin_decorator
 def course_offers(request):
 	courselist = CourseOffer.objects.all()
 	total_course=courselist.count()
@@ -90,6 +98,7 @@ def course_offers(request):
 	return render(request,"superadmin/course_offers.html", context)
 
 @login_required(login_url='superadmin_loginform')
+@check_superadmin_decorator
 def course_selling_history(request):
 	history_list = CourseHistory.objects.all()
 	total_history=history_list.count()
@@ -102,6 +111,7 @@ def course_selling_history(request):
 
 
 @login_required(login_url='superadmin_loginform')
+@check_superadmin_decorator
 def superadmin_wallet(request):
 	if request.method == "POST":
 		amount = request.POST.get('amount')
@@ -131,13 +141,11 @@ def superadmin_wallet(request):
     
 
 	transitions=request.user.amounttransitionhistory.all()
-	salehistory =CourseHistory.objects.filter(seller=request.user)
-	buyhistory =CourseHistory.objects.filter(buyer=request.user)
+	selling_history = CourseHistory.objects.all()
 
 	context={
 		'transitions':transitions,
-		"salehistory":salehistory,
-		"buyhistory":buyhistory
+		'selling_history':selling_history,
 		
 	}
 	# wallet = request.user.wallet

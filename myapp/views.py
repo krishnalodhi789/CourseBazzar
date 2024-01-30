@@ -33,19 +33,18 @@ def home(request):
 
 def buycourse(request):
     category_name = request.GET.get("category")
+    course_title = request.GET.get("course_title")
     print(category_name)
     courses=[]     
     if category_name is not None:
-        # if CourseCategory.objects.filter(category_name__icontains=category_name).exists():
-        #     category = CourseCategory.objects.filter(category_name__icontains=category_name)
-        #     print(category)
-        #     courses= Course.objects.filter(category=category)
         category = CourseCategory.objects.filter(category_name__icontains=category_name)
         for i in category:
             print(i)
             data=Course.objects.filter(category=i)
             courses.extend(data)
-        print(courses)
+    elif course_title is not None:
+        courses = Course.objects.filter(title__icontains=course_title)
+        pass
     else:
         courses= Course.objects.all().order_by("-id")
 
@@ -55,6 +54,7 @@ def buycourse(request):
         "buycourse":True,
         "courses":courses,
         "categories":categories,
+        "course_title":course_title,
         "selected_category":selected_category,
     }
     return render(request, 'buycourse.html',context)

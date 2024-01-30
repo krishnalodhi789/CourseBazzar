@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'customer',
-    'superadmin'
+    'superadmin',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
