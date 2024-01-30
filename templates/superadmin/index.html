@@ -3,116 +3,125 @@
 
 {% block style %}
 #box_hover:hover{
-	outline:1px #cbd1cc solid !important;
-	cursor:pointer;
+outline:1px #cbd1cc solid !important;
+cursor:pointer;
 }
 {% endblock style %}
 
 {% block body %}
-<div class="container-fluid px-5  my-5">
-    <div class="row mx-0 gy-3">
-       <div class="col-3 p-3">
-       	<a href="{% url 'superadmin_approved_course_list' %}" class="text-decoration-none">
-       		<div class="p-2 shadow-lg " id='box_hover'>
-       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-       		<p class="fs-5 fw-semibold text-secondary text-center mb-1">
-       			Approved Course
-       		</p>
-			<p class="fs-5 fw-semibold text-secondary text-center mb-1">
-				{{total_approved_courses}}
-			</p>
-       	</div>
-       	</a>
-       </div>
-       <div class="col-3 p-3">
-       	<a href="{% url 'superadmin_not_approved_course_list' %}" class="text-decoration-none">
-       		<div class="p-2 shadow-lg " id='box_hover'>
-       		<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
-       		<p class="fs-5 fw-semibold text-secondary text-center mb-1">
-       			Not Approved Course
-       		</p>
-			
-			   <p class="fs-5 fw-semibold text-secondary text-center mb-1">
-				{{total_not_approved_courses}}
-			</p>
-       	</div>
-       	</a>
-       </div>
-
-       <div class="col-3 p-3">
-		<a href="{% url 'superadmin_course_offers' %}" class="text-decoration-none">
-			<div class="p-2 shadow-lg " id='box_hover'>
-			<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
-			<p class="fs-5 fw-semibold text-secondary text-center mb-1">
-				Offers
-			</p>
-		 
-			<p class="fs-5 fw-semibold text-secondary text-center mb-1">
-			 {{total_offers}}
-		 </p>
+<div class="container-fluid px-0">
+	<div class="row mx-0 px-0">
+		<div class="col-2 px-0">
+			{% include 'superadmin/sidebar.html' %}
 		</div>
-		</a>
-	</div>
-	
-	<div class="col-3 p-3">
-		<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
-			<div class="p-2 shadow-lg " id='box_hover'>
-			<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
-			<p class="fs-5 fw-semibold text-secondary text-center mb-1">
-				Selling History
-			</p>
-		 
-			<p class="fs-5 fw-semibold text-secondary text-center mb-1">
-			 {{total_sales}}
-		 </p>
+		<div class="col-10 py-5">
+			<div class="row gy-3 px-0">
+
+
+				<div class="col-4 p-3">
+					<a href="{% url 'superadmin_approved_course_list' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Approved Course
+							</p>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_approved_courses}}
+							</p>
+						</div>
+					</a>
+				</div>
+				<div class="col-4 p-3">
+					<a href="{% url 'superadmin_not_approved_course_list' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Not Approved Course
+							</p>
+
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_not_approved_courses}}
+							</p>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_offers' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Offers
+							</p>
+
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_offers}}
+							</p>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
+
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
+				</div>
+				<div class="col-4 p-3">
+					<div class="p-2 shadow-lg " id='box_hover'>
+						<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+						<p class="fs-5 fw-semibold text-secondary text-center">
+
+						</p>
+					</div>
+				</div>
+
+				<div class="col-4 p-3">
+					<div class="p-2 shadow-lg " id='box_hover'>
+						<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+						<p class="fs-5 fw-semibold text-secondary text-center">
+							Approved Course
+						</p>
+					</div>
+				</div>
+
+				<div class="col-4 p-3">
+					<div class="p-2 shadow-lg " id='box_hover'>
+						<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+						<p class="fs-5 fw-semibold text-secondary text-center">
+							Approved Course
+						</p>
+					</div>
+				</div>
+
+				<div class="col-4 p-3">
+					<div class="p-2 shadow-lg " id='box_hover'>
+						<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+						<p class="fs-5 fw-semibold text-secondary text-center">
+							Approved Course
+						</p>
+					</div>
+				</div>
+
+				<div class="col-4 p-3">
+					<div class="p-2 shadow-lg " id='box_hover'>
+						<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
+						<p class="fs-5 fw-semibold text-secondary text-center">
+							Approved Course
+						</p>
+					</div>
+				</div>
+			</div>
 		</div>
-		</a>
 	</div>
-       <div class="col-3 p-3">
-       	<div class="p-2 shadow-lg " id='box_hover'>
-       		<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
-       		<p class="fs-5 fw-semibold text-secondary text-center">
-       			
-       		</p>
-       	</div>
-       </div>
-
-       <div class="col-3 p-3">
-       	<div class="p-2 shadow-lg " id='box_hover'>
-       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-       		<p class="fs-5 fw-semibold text-secondary text-center">
-       			Approved Course
-       		</p>
-       	</div>
-       </div>
-
-       <div class="col-3 p-3">
-       	<div class="p-2 shadow-lg " id='box_hover'>
-       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-       		<p class="fs-5 fw-semibold text-secondary text-center">
-       			Approved Course
-       		</p>
-       	</div>
-       </div>
-
-       <div class="col-3 p-3">
-       	<div class="p-2 shadow-lg " id='box_hover'>
-       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-       		<p class="fs-5 fw-semibold text-secondary text-center">
-       			Approved Course
-       		</p>
-       	</div>
-       </div>
-
-       <div class="col-3 p-3">
-       	<div class="p-2 shadow-lg " id='box_hover'>
-       		<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-       		<p class="fs-5 fw-semibold text-secondary text-center">
-       			Approved Course
-       		</p>
-       	</div>
-       </div>
-    </div>
 </div>
 
 {% endblock body %}
