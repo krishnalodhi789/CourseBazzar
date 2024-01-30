@@ -1,5 +1,13 @@
 {% extends "base.html" %} 
 {% load static %} 
+
+{% block style %}
+.offers-badge{
+transform:rotate(-45deg);
+top:8px;
+left:-258px;
+}
+{% endblock style %}
 {% block body %}
 
 <div class="container-fluid">
@@ -39,8 +47,13 @@
         {% for cart in carts %}
         <div class="row py-4">
           <div class="col-11 mx-auto shadow-lg d-flex justify-content-center">
-            <div class="row px-2 py-3">
-              <div class="col-3 pe-0" style="height: 150px">
+            <div class="row px-2 py-3  position-relative overflow-hidden">
+               {% if cart.course.courseoffer %}
+                <div class="position-absolute offers-badge w-50 py-2 text-center bg-info">
+                  <span class="small fw-semibold text-white fs-6">{{cart.course.courseoffer.offer}}%  <span>Off</span></span>
+                </div>
+                {% endif %}
+              <div class="col-3 pe-0" >
                 <img
                   src="{{cart.course.image.url}}"
                   height="100%"
@@ -85,9 +98,18 @@
                   <div class="vr"></div>
                   <i class="bi bi-suit-heart pe-1"></i>
                 </div>
-                <h5 class="text-center mt-3">
-                  <i class="bi bi-currency-dollar"></i>{{cart.course.price}}.00
+               {% if cart.course.courseoffer.remaining_amount %}
+                <h5 class="text-center mt-1 mb-0">
+                  <i class="bi bi-currency-dollar"></i>{{cart.course.courseoffer.remaining_amount|floatformat:2}}
                 </h5>
+                <p class="text-center mb-1" style="font-size: 14px">
+                  <del><i class="bi bi-currency-dollar"></i>{{cart.course.price|floatformat:2}}</del>
+                </p>
+                {% else %}
+                <h5 class="text-center mt-1">
+                  <i class="bi bi-currency-dollar"></i>{{cart.course.price|floatformat:2}}
+                </h5>
+                {% endif %}
                 <p class="small fw-semibold mb-1 text-center">
                   {{cart.course.sale_counter}} Sales
                 </p>

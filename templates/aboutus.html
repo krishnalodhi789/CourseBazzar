@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+{% endblock style %}
+
+
+{% block body %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10 mx-auto shadow-lg p-4">
+      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+       
+        <div class="carousel-inner ">
+          <div class="carousel-item active " data-bs-interval="4000">
+            <div class="row justify-content-around">
+              <div class="col-3 p-3">
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/pic.png' %}" height="80px" width="100%" alt="">
+                </div>
+                <div class="col-8">
+                  <h6>BK LOdhi</h6>
+                  <p class="text-secondary" style="font-size: 12px">CEO & Founder</p>
+                </div>
+                <div class="col-12">
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-3 p-3">
+              <div class="shadow-sm">
+                <h1>heloo2</h1>
+              </div>
+            </div>
+            <div class="col-3 p-3">
+              <div class="shadow-sm">
+                <h1>heloo3</h1>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="carousel-item  " data-bs-interval="4000">
+            <div class="row justify-content-evenly">
+              <div class="col-3 p-3">
+              <div class="shadow-sm">
+                <h1>heloo4</h1>
+              </div>
+            </div>
+            <div class="col-3 p-3">
+              <div class="shadow-sm">
+                <h1>heloo5</h1>
+              </div>
+            </div>
+            <div class="col-3 p-3">
+              <div class="shadow-sm">
+                <h1>heloo6</h1>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="carousel-item  ">
+            <div class="row justify-content-evenly">
+              <div class="col-3 p-3">
+              <div class="shadow-sm">
+                <h1>heloo7</h1>
+              </div>
+            </div>
+            <div class="col-3 p-3">
+              <div class="shadow-sm">
+                <h1>heloo8</h1>
+              </div>
+            </div>
+            <div class="col-3 p-3">
+              <div class="shadow-sm">
+                <h1>heloo9</h1>
+              </div>
+            </div>
+            </div>
+          </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock body %}

@@ -1,4 +1,4 @@
-from .models import CustomUser, AddToCart
+from .models import CustomUser, AddToCart,CourseOffer
 from django.contrib.auth.models import User
 
 def profile_detail(request):
@@ -13,11 +13,16 @@ def profile_detail(request):
         carts =  AddToCart.objects.filter(user_id = customer.id)
         total_price = 0.00
         for cart in carts:
-            total_price += cart.course.price
+            if CourseOffer.objects.filter(course=cart.course).exists():
+                total_price += CourseOffer.objects.get(course=cart.course).remaining_amount
+            else:
+                total_price += cart.course.price
+
+        
         context={
             'customer':customer,
             'cartcounter' : cartcounter,
-            'total_price':total_price
+            'total_pay_price':total_price
         }       
     else:
         context={

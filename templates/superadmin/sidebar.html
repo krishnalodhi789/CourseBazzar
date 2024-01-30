@@ -1,29 +1,54 @@
 {% load static %}
-<div class="container-fluid border-end shadow ">
-    <div class="d-flex flex-column pt-4">
-        <div class="mb-2 border-bottom px-2 pb-2 {{course_list}}">
-            <a href="{% url 'superadmin_approved_course_list'  %}" class="text-decoration-none text-secondary fw-semibold fs-5  {{course_list}}">
-                Course List
+<div class="container-fluid  px-0 position-fixed shadow-lg w-auto" style="height:89vh !important; width: 285px !important">
+    <div class="d-flex flex-column pt-4 h-100" >
+        <div class="text-center">
+            <img
+              src="{% static 'images/pic.png' %}"
+              alt
+              style="height: 120px; width: 130px"
+              class="rounded-circle"
+            />
+            <h4 class="text-dark fst-italic">{{user.username}}</h4>
+        </div>
+        <div class="mb-3  px-2 border-bottom  {{home}}" id="sidebar_link_hover">
+            <a href="{% url 'superadmin_index'  %}" class="text-decoration-none text-secondary fw-semibold fs-6 py-2 d-block  align-middle {{home}}" id="sidebar_link_hover">
+                Home
             </a>
         </div>
-        <div class="mb-2 border-bottom px-2 pb-2">
-            <a href="" class="text-decoration-none text-secondary fw-semibold fs-5">
-                Course List
+        <div class="mb-3  px-2 border-bottom {{approved}}" id="sidebar_link_hover">
+            <a href="{% url 'superadmin_approved_course_list'  %}" class=" text-decoration-none text-secondary fw-semibold fs-6 py-2 d-block {{approved}} align-middle" id="sidebar_link_hover">
+               Approved Course List
             </a>
         </div>
-        <div class="mb-2 border-bottom px-2 pb-2">
-            <a href="" class="text-decoration-none text-secondary fw-semibold fs-5">
-                Course List
+
+        <div class="mb-3  px-2 border-bottom {{not_approved}}" id="sidebar_link_hover">
+            <a href="{% url 'superadmin_not_approved_course_list'  %}" class=" text-decoration-none text-secondary fw-semibold fs-6 py-2 d-block {{not_approved}} align-middle" id="sidebar_link_hover">
+              Not Approved Course List
             </a>
         </div>
-        <div class="mb-2 border-bottom px-2 pb-2">
-            <a href="" class="text-decoration-none text-secondary fw-semibold fs-5">
-                Course List
+
+        <div class="mb-3  px-2 border-bottom {{offers}}" id="sidebar_link_hover">
+            <a href="{% url 'superadmin_course_offers'  %}" class=" text-decoration-none text-secondary fw-semibold fs-6 py-2 d-block {{offers}} align-middle" id="sidebar_link_hover">
+              Offers
             </a>
         </div>
-        <div class="mb-2 border-bottom px-2 pb-2">
-            <a href="" class="text-decoration-none text-secondary fw-semibold fs-5">
-                Course List
+
+
+        <div class="mb-3  px-2 border-bottom {{selling_hostory}}" id="sidebar_link_hover">
+            <a href="{% url 'superadmin_course_selling_history'  %}" class=" text-decoration-none text-secondary fw-semibold fs-6 py-2 d-block {{selling_hostory}} align-middle" id="sidebar_link_hover">
+              Selling History
+            </a>
+        </div>
+
+        <div class="mb-3  px-2 border-bottom {{wallet}}" id="sidebar_link_hover">
+            <a href="{% url 'superadmin_wallet'  %}" class=" text-decoration-none text-secondary fw-semibold fs-6 py-2 d-block {{wallet}} align-middle" id="sidebar_link_hover">
+              Your Wallet
+            </a>
+        </div>
+
+        <div class="mt-5 d-flex " >
+            <a href="{% url 'superadmin_logoutform'  %}" class=" text-decoration-none mx-auto text-secondary fw-semibold fs-6 py-2 d-block  align-middle">
+             <button class="btn btn-danger px-4 py-2 fw-semibold"> Logout <i class="bi bi-arrow-right"></i></button>
             </a>
         </div>
     </div>

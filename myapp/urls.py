@@ -24,4 +24,10 @@ urlpatterns = [
         super_deals,
         name="super_deals",
     ),
+
+    path(
+        "About Us/",
+        aboutus,
+        name="aboutus",
+    ),
 ]

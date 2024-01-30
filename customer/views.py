@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import  Course, CourseCategory, AddToCart, AmountTransitionHistory, CourseHistory, CustomUser, Wallet
+from .models import  Course, CourseOffer,CourseCategory, AddToCart, AmountTransitionHistory, CourseHistory, CustomUser, Wallet
 
 
 def signupform(request):
@@ -184,7 +184,10 @@ def conformorder(request):
     courses =  request.user.carts.all()
     total_price =0
     for cart in courses :
-        total_price += cart.course.price
+        if CourseOffer.objects.filter(course=cart.course).exists():
+            total_price += CourseOffer.objects.get(course=cart.course).remaining_amount
+        else:
+            total_price += cart.course.price
     context={
         'courses':courses,
         'total_price':total_price
@@ -200,18 +203,29 @@ def conformation(request):
         if user_balance.balance < float(total_amount):
             messages.error(request, 'Insufficient Balance..')
             return redirect("conformorder")
-        user_balance.balance -= float(total_amount)
+        user_balance.balance =user_balance.balance - float(total_amount)
         user_balance.save()
-        superadmin = CustomUser.objects.get(username='admin')
+
+
+        superadmin = CustomUser.objects.get(username='superadmin')
+        superadmin_wallet=superadmin.wallet
+
         carts =request.user.carts.all()
         pdf_urls =[]
+
         for cart in carts:
             seller =cart.course.user
             saller_wallet = seller.wallet
-            saller_wallet.balance += cart.course.price*95/100
-            superadmin.wallet.balance += cart.course.price*5/100
+
+            if CourseOffer.objects.filter(course=cart.course).exists():
+                price = CourseOffer.objects.get(course=cart.course).remaining_amount
+            else:
+                price = cart.course.price
+            saller_wallet.balance += price*95/100
+            superadmin_wallet.balance += price*5/100
             saller_wallet.save()
-            superadmin.save()
+            superadmin_wallet.save()
+            
             course = cart.course
             buyhistory = CourseHistory.objects.create(
                 buyer=request.user,

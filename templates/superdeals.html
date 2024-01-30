@@ -13,8 +13,8 @@ right:-58px;
 }
 .offers-badge{
 transform:rotate(-45deg);
-top:-5px;
-left:-52px;
+top:0px;
+left:-72px;
 }
 .bets-sellers-badge{
   transform:rotate(-45deg);
@@ -30,7 +30,7 @@ left:-52px;
 
 <!-- Best Offer Section ---------------- -->
 <div class="container-fluid my-5 px-5">
-  <div class="row px-5 justify-content-evenly">
+  <div class="row px-5 justify-content-evenly py-5">
     {% for course in bestoffercourses %}
     <div class="col-3  my-auto p-3 border shadow-lg position-relative overflow-hidden" style="height: fit-content;">
       <div class="bg-info px-5 py-3 border position-absolute w-50 text-center bestoffercourse-badge">
@@ -66,18 +66,7 @@ left:-52px;
     <div class="col-4">
       <h4>Other Offers ....</h4>
     </div>
-    <div class="col-4 ms-auto d-flex">
-      <div class="dropdown ms-auto my-auto">
-        <button class="border-0 bg-body fw-semibold px-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-         Filter
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-    </div>
+  
     <hr class="mt-0">
 
   </div>
@@ -92,7 +81,7 @@ left:-52px;
       <div class="pt-4 pb-2 px-4 shadow-sm position-relative overflow-hidden"
         style="height: fit-content; height: fit-content;">
         <div class="position-absolute offers-badge w-50 py-2 text-center bg-info">
-          <span class="small fw-semibold text-white">{{course.offer}}% </span>
+          <span class="small fw-semibold text-white">{{course.offer}} % </span>
         </div>
         <img src="{{course.course.image.url}}" height="150px" width="100%" alt="">
         <span class="text-secondary small">{{course.saller.email}}</span>

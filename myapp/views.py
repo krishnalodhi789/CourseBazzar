@@ -8,7 +8,7 @@ def home(request):
     for course in courses:
         if max_sale<course.sale_counter:
             max_sale=course.sale_counter
-    hotcourse = Course.objects.get(sale_counter=max_sale)
+    hotcourse = Course.objects.filter(sale_counter=max_sale).first()
     
     offers = CourseOffer.objects.all().order_by('-offer')[:6]
     bestoffer = 0
@@ -34,13 +34,21 @@ def home(request):
 def buycourse(request):
     category_name = request.GET.get("category")
     print(category_name)
+    courses=[]     
     if category_name is not None:
-        category = CourseCategory.objects.get(category_name=category_name)
-        courses= Course.objects.filter(category=category)
+        # if CourseCategory.objects.filter(category_name__icontains=category_name).exists():
+        #     category = CourseCategory.objects.filter(category_name__icontains=category_name)
+        #     print(category)
+        #     courses= Course.objects.filter(category=category)
+        category = CourseCategory.objects.filter(category_name__icontains=category_name)
+        for i in category:
+            print(i)
+            data=Course.objects.filter(category=i)
+            courses.extend(data)
         print(courses)
-        
     else:
         courses= Course.objects.all().order_by("-id")
+
     selected_category =category_name
     categories = CourseCategory.objects.all()
     context={
@@ -94,3 +102,10 @@ def super_deals(request):
         'otheroffercourses':otheroffercourses
     }
     return render(request, 'superdeals.html', context)
+
+
+def aboutus(request):
+    context={
+    'aboutus':True
+    }
+    return render(request, 'aboutus.html',context)

@@ -22,6 +22,7 @@
                                     <th>S. No.</th>
                                     <th>Course Name</th>
                                     <th>PDF Name</th>
+                                    <th>Offer %</th>
                                     <th>Price</th>
                                 </tr>
                             </thead>
@@ -30,12 +31,28 @@
                                 <tr>
                                     <td>{{forloop.counter}}</td>
                                     <td>{{cart.course.title}}</td>
-                                    <td><button
+                                    <td>
+                                      <button
                                             class="btn btn-outline-secondary"><i
                                                 class="bi bi-file-earmark-pdf"></i>
-                                            {{cart.course.course_file|cut:'Courses/' }} </button></td>
-                                    <td><i class="bi bi-currency-dollar"></i>
-                                        {{cart.course.price}}.00</td>
+                                            {{cart.course.course_file|cut:'Courses/' }} 
+                                        </button>
+                                    </td>
+                                    {% if cart.course.courseoffer %}
+                                    <td>{{cart.course.courseoffer.offer}}% off</td>
+                                    <td class="">
+                                      <strong><i class="bi bi-currency-dollar"></i>{{cart.course.courseoffer.remaining_amount|floatformat:2}}</strong>
+                                      <span class=" text-center mb-1 " style="font-size: 14px"><del> <i class="bi bi-currency-dollar"></i>{{cart.course.price|floatformat:2}}</del></span> 
+                                    </td>
+                                    {% else %}
+                                    <td></td>
+                                    <td>
+                                      <strong>
+                                        <i class="bi bi-currency-dollar"></i>
+                                        {{cart.course.price|floatformat:2}}
+                                      </strong>
+                                    </td>
+                                    {% endif %}
 
                                 </tr>
                                 {% endfor %}
@@ -43,8 +60,12 @@
                                     <th>Total</th>
                                     <td></td>
                                     <td></td>
-                                    <th><i class="bi bi-currency-dollar"></i>
-                                        {{total_price|floatformat:2}}</th>
+                                    <td></td>
+                                    
+                                    <th>
+                                      <i class="bi bi-currency-dollar"></i>
+                                        {{total_price|floatformat:2}}
+                                    </th>
                                 </tr>
                             </tbody>
                         </table>

@@ -123,10 +123,10 @@ left:-52px;
         <h4>Other Offers ....</h4>
       </div>
 
-      <div class="col-8 ms-auto d-flex border"id="showcategories">
-        <a href="">
-          <button class="btn btn-outline-info fw-semibold">
-            Get More
+      <div class="col-8 ms-auto d-flex pb-1"id="showcategories">
+        <a href="{% url 'super_deals'   %}" class="ms-auto">
+          <button class="btn btn-outline-info fw-semibold px-3">
+            Get More <i class="bi bi-arrow-up-right-square ms-2"></i>
           </button>
         </a>
         </div>
@@ -150,7 +150,7 @@ left:-52px;
               <span class="text-secondary small">{{offercourse.course.category.category_name}}</span>
               <h6>{{offercourse.course.title}}</h6>
               <p class="mb-0"> <span class="text-secondary fw-semibold fs-5 text-danger me-2 align-middle"><i
-                    class="bi bi-currency-dollar"></i>{{course.remaining_amount|floatformat:2}}</span>
+                    class="bi bi-currency-dollar"></i>{{offercourse.remaining_amount|floatformat:2}}</span>
                 <span class="text-secondary fw-semibold small"><del class="text-secondary fw-semibold"><i
                       class="bi bi-currency-dollar"></i>{{offercourse.course.price|floatformat:2}}</del></span>
               </p>

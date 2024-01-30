@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from customer.models import Course, CourseOffer, CourseHistory
+from customer.models import Course, CourseOffer, CourseHistory, Wallet, AmountTransitionHistory
 import datetime
 
 
@@ -23,9 +23,13 @@ def loginform(request):
 		else:
 			messages.error(request,"Invalid Username and Password..")
 			return redirect('superadmin_loginform')
+
+
 	return render(request,"superadmin/login.html")
 
-
+def logoutform(request):
+	logout(request)
+	return redirect('superadmin_loginform')
 
 @login_required(login_url='superadmin_loginform')
 def index(request):
@@ -95,4 +99,51 @@ def course_selling_history(request):
 	'total_history':total_history
 	}
 	return render(request,"superadmin/course_selling_history.html", context)
+
+
+@login_required(login_url='superadmin_loginform')
+def superadmin_wallet(request):
+	if request.method == "POST":
+		amount = request.POST.get('amount')
+		status = request.POST.get('status')
+		wallet = request.user.wallet
+		if float(amount)<0:
+			messages.error(request, 'Deposit Amount should be greater than 0.')
+			return redirect("wallet")
+		if status == 'deposit' :
+			total_balance = wallet.balance+float(amount)
+			wallet.balance = total_balance
+		else:
+			if wallet.balance > float(amount):
+				total_balance = wallet.balance-float(amount)
+				wallet.balance = total_balance
+			else:
+				messages.error(request, 'Insufficient Balance...')
+				return redirect("wallet")
+		wallet.save()
+		transition = AmountTransitionHistory.objects.create(
+			user= request.user,
+			status = status,
+			amount = amount            
+		)
+		transition.save()
+		return redirect("superadmin_wallet")
+    
+
+	transitions=request.user.amounttransitionhistory.all()
+	salehistory =CourseHistory.objects.filter(seller=request.user)
+	buyhistory =CourseHistory.objects.filter(buyer=request.user)
+
+	context={
+		'transitions':transitions,
+		"salehistory":salehistory,
+		"buyhistory":buyhistory
+		
+	}
+	# wallet = request.user.wallet
+	# balance = wallet.balance
+	# context={
+	# 'balance':balance,
+	# }
+	return render(request,"superadmin/superadmin_wallet.html", context)
 

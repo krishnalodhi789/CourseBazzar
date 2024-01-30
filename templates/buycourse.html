@@ -29,6 +29,12 @@ select:focus{
 .selectbox_hidden{
   height: 0px !important
 }
+
+.offers-badge{
+transform:rotate(-45deg);
+top:7px;
+left:-192px;
+}
 {% endblock style %}
 
 
@@ -57,7 +63,7 @@ select:focus{
                Filter
                <i class="bi bi-filter"> </i>
              </button>
-              <div class="w-100 border position-absolute overflow-hidden selectbox_hidden" id="selectbox" style="top: 40px; background-color: #fff !important; ">
+              <div class="w-100 border z-3 position-absolute overflow-hidden selectbox_hidden" id="selectbox" style="top: 40px; background-color: red !important; ">
                 {% for i in categories %}
                  <button type="button" class="border-0 bg-body d-block text-start w-100 fw-semibold text-secondary category_hover mb-0 py-2 ps-3" onclick="selectedcategory('{{i.category_name}}')" >
                     {{i.category_name}}
@@ -80,7 +86,12 @@ select:focus{
          {% if course.approve %}
           {% if not course.user == user %}
           <div class="col-6">
-              <div class="shadow-lg d-flex justify-content-center rounded px-1 py-3 h-100">
+              <div class="shadow-lg d-flex justify-content-center rounded px-1 py-3 h-100 position-relative overflow-hidden">
+                {% if course.courseoffer %}
+                <div class="position-absolute offers-badge w-50 py-2 text-center bg-info">
+                  <span class="small fw-semibold text-white fs-6">{{course.courseoffer.offer}}%  <span>Off</span></span>
+                </div>
+                {% endif %}
                   <div style="width: 35%">
                     <img src="{{course.image.url}}" height="100%" width="100%" alt="" />
                   </div>
@@ -111,9 +122,17 @@ select:focus{
                       <i class="bi bi-suit-heart pe-1"></i>
                   </div>
                   <div class="my-auto">
-                      <h5 class="text-center">
-                      <i class="bi bi-currency-dollar"></i>{{course.price}}.00
+                    {% if course.courseoffer.offer %}
+                      <h5 class="text-center mb-0">
+                        <i class="bi bi-currency-dollar"></i>{{course.courseoffer.remaining_amount|floatformat:2}}
                       </h5>
+                      <p class=" text-center mb-1 " style="font-size: 14px"><del> <i class="bi bi-currency-dollar"></i>{{course.price|floatformat:2}}</del></p>
+                    {% else %}
+                    <h5 class="text-center ">
+                      <i class="bi bi-currency-dollar"></i>{{course.price|floatformat:2}}
+                    </h5>
+                    {% endif %}
+                      
                       <p class="small fw-semibold text-center mb-1">
                       {{course.sale_counter}} Sales
                       </p>

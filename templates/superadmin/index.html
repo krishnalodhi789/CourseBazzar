@@ -11,10 +11,10 @@ cursor:pointer;
 {% block body %}
 <div class="container-fluid px-0">
 	<div class="row mx-0 px-0">
-		<div class="col-2 px-0">
-			{% include 'superadmin/sidebar.html' %}
+		<div class="col-2 px-0" >
+			{% include 'superadmin/sidebar.html' with home="sidebar_acitve_link" %}
 		</div>
-		<div class="col-10 py-5">
+		<div class="col-10 py-2">
 			<div class="row gy-3 px-0">
 
 
@@ -76,48 +76,109 @@ cursor:pointer;
 					</a>
 				</div>
 				<div class="col-4 p-3">
-					<div class="p-2 shadow-lg " id='box_hover'>
-						<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
-						<p class="fs-5 fw-semibold text-secondary text-center">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
 
-						</p>
-					</div>
-				</div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
+				</div><div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
 
-				<div class="col-4 p-3">
-					<div class="p-2 shadow-lg " id='box_hover'>
-						<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-						<p class="fs-5 fw-semibold text-secondary text-center">
-							Approved Course
-						</p>
-					</div>
-				</div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
+				</div><div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
 
-				<div class="col-4 p-3">
-					<div class="p-2 shadow-lg " id='box_hover'>
-						<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-						<p class="fs-5 fw-semibold text-secondary text-center">
-							Approved Course
-						</p>
-					</div>
-				</div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
+				</div><div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
 
-				<div class="col-4 p-3">
-					<div class="p-2 shadow-lg " id='box_hover'>
-						<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-						<p class="fs-5 fw-semibold text-secondary text-center">
-							Approved Course
-						</p>
-					</div>
-				</div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
+				</div><div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
 
-				<div class="col-4 p-3">
-					<div class="p-2 shadow-lg " id='box_hover'>
-						<div class="text-center"><i class="bi bi-card-checklist display-4 text-info"></i></div>
-						<p class="fs-5 fw-semibold text-secondary text-center">
-							Approved Course
-						</p>
-					</div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
+				</div><div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
+
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
+				</div><div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
+
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
+				</div><div class="col-4 p-3">
+					<a href="{% url 'superadmin_course_selling_history' %}" class="text-decoration-none">
+						<div class="p-2 shadow-lg " id='box_hover'>
+							<div class="text-center"><i class="bi bi-journal-x display-4 text-danger"></i></div>
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								Selling History
+							</p>
+
+							<p class="fs-5 fw-semibold text-secondary text-center mb-1">
+								{{total_sales}}
+							</p>
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>
