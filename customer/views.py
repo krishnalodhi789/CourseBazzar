@@ -264,7 +264,7 @@ def sellinghistory(request):
 @login_required(login_url='login/')
 def becamesaller(request):
     user = CustomUser.objects.get(id=request.user.id)
-    user.is_saller=True
+    user.is_seller=True
     user.save()
     messages.info(request, "You are now a Saller..")
     return redirect("addcourse")

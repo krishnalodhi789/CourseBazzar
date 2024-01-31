@@ -7,7 +7,7 @@ from .models import Course ,AddToCart,Wallet, AmountTransitionHistory, CourseHis
 class CustomUserAdmin(UserAdmin):
     list_display = (
         'username', 'email', 'first_name', 'last_name', 'is_buyer',
-        'is_saller', 'phone','gender','image'
+        'is_seller', 'phone','gender','image'
         )
     fieldsets = (
         (None, {
@@ -26,7 +26,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('last_login', 'date_joined')
         }),
         ('Additional info', {
-            'fields': ('is_buyer', 'is_saller', 'phone','gender','image')
+            'fields': ('is_buyer', 'is_seller', 'phone','gender','image')
         })
     )
 
@@ -47,7 +47,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('last_login', 'date_joined')
         }),
         ('Additional info', {
-            'fields':  ('is_buyer', 'is_saller', 'phone','gender','image')
+            'fields':  ('is_buyer', 'is_seller', 'phone','gender','image')
         })
     )
 admin.site.register(CustomUser, CustomUserAdmin)

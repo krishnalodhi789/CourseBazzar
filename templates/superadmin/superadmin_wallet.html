@@ -1,6 +1,6 @@
 {% extends "superadmin/base.html" %}
 {% load static %}
-
+{% load custom_tags %}
 
 {% block body %}
 <div class="container-fluid px-0">
@@ -102,6 +102,44 @@
                             </td>
                         </tr>
                         {% endif %}
+                        
+                        {% endfor %}
+                    </tbody>
+            </table>
+          </div>
+        </div>
+
+        
+        <div class="row mt-5">
+          <h4 class="text-secondary"><i class="bi bi-clock-history"></i>  Commission Transition History : </h4>
+          <hr />
+          <div class="col-11 mt-3 mx-auto">
+            <table class="table" id="PDF-table">
+              <thead>
+                <tr>
+                  <th scope="col">S. No.</th>
+                  <th scope="col">Data & Time</th>
+                  <th scope="col">course Title</th>
+                  <th scope="col">Seller Name</th>
+                  <th scope="col">Buyer Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Commission Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in selling_history %} 
+                        <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.datetime}}</td>
+                        <td>{{i.course.title}}</td>
+                        <td>{{i.seller.first_name}} {{i.seller.last_name}}</td>
+                        <td>{{i.buyer.first_name}} {{i.buyer.last_name}}</td>
+                        <td><i class="bi bi-currency-dollar"></i>{{i.course.price|floatformat:2}}</td>
+                        <td class="text-success">
+                            <i class="bi bi-plus-lg"></i>
+                            <i class="bi bi-currency-dollar"></i>
+                            {{ i.course.price|floatformat:2|mul:5|div:100 }}
+                        </td>
                         
                         {% endfor %}
                     </tbody>

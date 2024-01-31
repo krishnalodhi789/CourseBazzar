@@ -29,7 +29,9 @@ ALLOWED_HOSTS = ["*"]
 
 TIME_ZONE =  'Asia/Kolkata'
 AUTH_USER_MODEL = 'customer.CustomUser'
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'customer',
-    'superadmin'
+    'superadmin',
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
     # 'middlewares.previouspath.PreviousPathMiddleware'
 ]
 

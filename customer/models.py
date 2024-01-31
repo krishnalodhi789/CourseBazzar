@@ -6,7 +6,7 @@ import datetime
 
 class CustomUser(AbstractUser):
     is_buyer = models.BooleanField(default=True)
-    is_saller = models.BooleanField(default=False)
+    is_seller = models.BooleanField(default=False)
     phone = models.CharField(max_length=15)
     gender =  models.CharField(max_length=32,choices=(('male',"Male"),("female", "Female"),("other", "Other")))
     image = models.ImageField(upload_to='Profile/', default='Profile/pic.png')
