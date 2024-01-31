@@ -33,6 +33,7 @@ def home(request):
 
 def buycourse(request):
     category_name = request.GET.get("category")
+    course_title = request.GET.get("course_title")
     print(category_name)
     courses=[]     
     if category_name is not None:
