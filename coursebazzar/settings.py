@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-wxt(_3f!xnlm$8rj6i_8ecnjkusxrzzwr*f+)2lkkb3n9i@lkf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 TIME_ZONE =  'Asia/Kolkata'
 AUTH_USER_MODEL = 'customer.CustomUser'
