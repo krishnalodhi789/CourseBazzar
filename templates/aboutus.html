@@ -5,76 +5,203 @@
 
 
 {% block body %}
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid my-4 ">
+  <div class="row py-4">
     <div class="col-10 mx-auto shadow-lg p-4">
+      <div class="row justify-content-center">
+        <h1 class="display-5 fw-bold text-center">Testimonials </h1>
+        <hr class="w-25 border-3 rounded-circle text-primary">
+        <div class="px-5">
+          <p class="text-secondary fw-noraml text-center px-5 mx-5">
+          Lorem ipsum dolor sit amet consectetur adipisicing, elit. At sint, natus neque cumque eius laborum esse velit, quia, dolores ullam dicta officiis facilis debitis recusandae ipsam doloribus, fuga inventore maiores.
+        </p>
+        </div>
+      </div>
+
       <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
        
         <div class="carousel-inner ">
           <div class="carousel-item active " data-bs-interval="4000">
-            <div class="row justify-content-around">
-              <div class="col-3 p-3">
-              <div class="row">
-                <div class="col-4">
-                  <img src="{% static 'images/pic.png' %}" height="80px" width="100%" alt="">
-                </div>
-                <div class="col-8">
-                  <h6>BK LOdhi</h6>
-                  <p class="text-secondary" style="font-size: 12px">CEO & Founder</p>
-                </div>
-                <div class="col-12">
-                  
+            <div class="row justify-content-around py-5">
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/ceo.avif' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">BK Lodhi</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px">CEO & Founder</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-3 p-3">
-              <div class="shadow-sm">
-                <h1>heloo2</h1>
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/tl.jpg' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">Vipin Jarwal</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px">Senior Team Leader</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-3 p-3">
-              <div class="shadow-sm">
-                <h1>heloo3</h1>
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/ad.webp' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">Abishek Denial</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px"> Junior Team Leader</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
             </div>
           </div>
           <div class="carousel-item  " data-bs-interval="4000">
-            <div class="row justify-content-evenly">
-              <div class="col-3 p-3">
-              <div class="shadow-sm">
-                <h1>heloo4</h1>
+            <div class="row justify-content-around py-5">
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/tl.jpg' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">Nakul Dangi</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px">Back-End Developer</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-3 p-3">
-              <div class="shadow-sm">
-                <h1>heloo5</h1>
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/sagar.jpg' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">Sagar Thakur</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px">Back-End Developer</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-3 p-3">
-              <div class="shadow-sm">
-                <h1>heloo6</h1>
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/rb.jpg' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">Raja Babu</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px"> Front-End Developer</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
             </div>
           </div>
           <div class="carousel-item  ">
-            <div class="row justify-content-evenly">
-              <div class="col-3 p-3">
-              <div class="shadow-sm">
-                <h1>heloo7</h1>
+           <div class="row justify-content-around py-5">
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/mp.jpg' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">Mona Patel</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px">Front-End Developer</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-3 p-3">
-              <div class="shadow-sm">
-                <h1>heloo8</h1>
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/ir.jpg' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">Iswar Rathore</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px">Front-End Developer</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-3 p-3">
-              <div class="shadow-sm">
-                <h1>heloo9</h1>
+              <div class="col-3 p-3 shadow-lg">
+                <div class="row justify-content-around">
+                  <div class="col-4 px-2">
+                    <img src="{% static 'images/lp.jpg' %}" class=" rounded-circle" height="90px" width="100%" alt="">
+                  </div>
+                  <div class="col-7 px-0 py-2">
+                    <h6 class="mb-0">Lokesh Prajapati</h6>
+                    <p class="text-secondary mb-0" style="font-size: 12px"> Front-End Developer</p>
+                    <p><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i><i class="bi bi-star-fill text-warning pe-1"  style="font-size: 14px"></i></p>
+                  </div>
+                  <div class="col-12 py-3 ">
+                    <p class="text-secondary text-center mb-0" style="font-size: 14px">
+                      <i class="fs-4 text-info fa-solid fa-quote-left pe-2"></i>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate ut at architecto fugit modi, hic ad, eveniet sunt laboriosam rerum. Eligendi beatae blanditiis aliquid, dolorem. Quam, quo iure placeat.
+                      <i class="fs-4 text-info fa-solid fa-quote-right ps-2"></i>
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
             </div>
           </div>
       
