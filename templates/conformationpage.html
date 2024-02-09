@@ -25,15 +25,30 @@
         </div>
     </div>
 </div>
+<a href="{% url 'buyinghistory' %}"  id="historypageload">buy history page</a>
 {% endblock body %}
 
 {% block customJS %}
 <script>
+    
+    function simulateClick(element) {
+            // Create a new mouse event
+            var event = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });
+            // Dispatch the event
+            element.dispatchEvent(event);
+        }
+
     window.onload= function(){
         const pdfList = document.getElementsByClassName("pdfLink")
+        const historypageload = document.getElementById("historypageload")
         for(i=0; i<pdfList.length; i++){
             pdfList[i].click()
         }
+        simulateClick(historypageload);
        
     }
      

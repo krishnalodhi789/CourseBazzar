@@ -19,7 +19,7 @@ class CourseCategory(models.Model):
     
 class Course(models.Model):
     user =  models.ForeignKey(CustomUser, related_name='courses', on_delete=models.CASCADE)
-    category = models.ForeignKey(CourseCategory,  on_delete=models.CASCADE)
+    category = models.OneToOneField(CourseCategory, related_name='category', on_delete=models.CASCADE)
     title =  models.CharField(max_length=50)
     key_points = models.CharField(max_length=100,blank=True, null=True)
     description = models.TextField(max_length=5000)

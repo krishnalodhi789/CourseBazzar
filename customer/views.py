@@ -72,6 +72,7 @@ def addcourse(request):
         pdf = request.FILES.get('course_file')
         image =request.FILES.get('image')
         category_id =request.POST.get('category_id')
+        keypoints =request.POST.get('key-points')
         
         customer = CustomUser.objects.get(id=request.user.id)
         course = Course.objects.create(
@@ -83,6 +84,9 @@ def addcourse(request):
             course_file = pdf,
             image =image,
         )
+        if keypoints is not None :
+            print(keypoints)
+            course.key_points = keypoints
         course.save()
         return redirect('uploadedcourses')
     context={

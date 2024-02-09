@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ["*"]
 
 TIME_ZONE =  'Asia/Kolkata'
 AUTH_USER_MODEL = 'customer.CustomUser'
+
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
@@ -129,7 +131,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR/'static']
-STATIC_ROOT = "staticfiles"
+# STATIC_ROOT = "staticfiles"
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR/'media'
