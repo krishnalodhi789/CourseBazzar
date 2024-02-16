@@ -64,11 +64,11 @@
         </a>
         {% if user.is_authenticated %}
  
-        {% if not user.is_saller %}
+        {% if not user.is_seller %}
        <div class="d-flex  align-items-center ms-auto">
         <a href="{% url 'becamesaller' %}" class="text-decoration-none">
           <button class="btn btn-outline-secondary">
-            Became a saller
+            Became a seller
           </button>
         </a>
        </div>
